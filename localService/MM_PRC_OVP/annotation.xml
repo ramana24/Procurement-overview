@@ -1,0 +1,1754 @@
+<!--
+
+    Copyright (C) 2009-2021 SAP SE or an SAP affiliate company. All rights reserved.
+
+-->
+<edmx:Edmx xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx" Version="4.0">
+	<edmx:Reference Uri="/sap/bc/ui5_ui5/ui2/ushell/resources/sap/ushell/components/factsheet/vocabularies/UI.xml">
+		<edmx:Include Alias="UI" Namespace="com.sap.vocabularies.UI.v1"/>
+	</edmx:Reference>
+	<edmx:Reference Uri="http://docs.oasis-open.org/odata/odata/v4.0/cs01/vocabularies/Org.OData.Measures.V1.xml">
+		<edmx:Include Alias="CQP" Namespace="Org.OData.Measures.V1"/>
+	</edmx:Reference>
+	<edmx:Reference Uri="/sap/bc/ui5_ui5/ui2/ushell/resources/sap/ushell/components/factsheet/vocabularies/Common.xml">
+		<edmx:Include Alias="Common" Namespace="com.sap.vocabularies.Common.v1"/>
+	</edmx:Reference>
+	<edmx:Reference Uri="/sap/opu/odata/sap/MM_PRC_OVP/$metadata">
+		<edmx:Include Alias="MM_PRC_OVP" Namespace="MM_PRC_OVP"/>
+	</edmx:Reference>
+	<edmx:Reference Uri="/sap/opu/odata/sap/C_PURGSPENDOFFCONTRACT_CDS/$metadata">
+		<edmx:Include Alias="OFF_CONTRACT" Namespace="OFF_CONTRACT"/>
+	</edmx:Reference>
+	<edmx:DataServices>
+		<Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Alias="MM_PRC_OVPAnnotation" Namespace="sap.cbesh.cestbon.MM_PRC_OVPAnnotation">
+			<!-- Monitor Supplier Confirmations Annotations -->
+			<Annotations Target="MM_PRC_OVP.C_ProcurementSmartFilterResult">
+				<Annotation Term="UI.SelectionFields">
+					<Collection>
+						<PropertyPath>Supplier</PropertyPath>
+						<PropertyPath>Material</PropertyPath>
+						<PropertyPath>MaterialGroup</PropertyPath>
+						<PropertyPath>PurchasingCategory</PropertyPath>
+						<PropertyPath>PurchasingGroup</PropertyPath>
+						<PropertyPath>PurchasingOrganization</PropertyPath>
+					</Collection>
+				</Annotation>
+			</Annotations>
+			<Annotations Target="MM_PRC_OVP.C_ProcurementSmartFilterParameters/P_DisplayCurrency">
+				<Annotation Term="com.sap.vocabularies.Common.v1.ValueList">
+					<Record>
+						<PropertyValue Property="Label" String="Currency"/>
+						<PropertyValue Property="CollectionPath" String="I_Currency"/>
+						<PropertyValue Property="SearchSupported" Bool="true"/>
+						<PropertyValue Property="Parameters">
+							<Collection>
+								<Record Type="com.sap.vocabularies.Common.v1.ValueListParameterInOut">
+									<PropertyValue Property="ValueListProperty" String="Currency"/>
+									<PropertyValue Property="LocalDataProperty" PropertyPath="P_DisplayCurrency"/>
+								</Record>
+								<Record Type="com.sap.vocabularies.Common.v1.ValueListParameterDisplayOnly">
+									<PropertyValue Property="ValueListProperty" String="Currency_Text"/>
+								</Record>
+								<Record Type="com.sap.vocabularies.Common.v1.ValueListParameterDisplayOnly">
+									<PropertyValue Property="ValueListProperty" String="Decimals"/>
+								</Record>
+								<Record Type="com.sap.vocabularies.Common.v1.ValueListParameterDisplayOnly">
+									<PropertyValue Property="ValueListProperty" String="CurrencyISOCode"/>
+								</Record>
+								<Record Type="com.sap.vocabularies.Common.v1.ValueListParameterDisplayOnly">
+									<PropertyValue Property="ValueListProperty" String="AlternativeCurrencyKey"/>
+								</Record>
+								<Record Type="com.sap.vocabularies.Common.v1.ValueListParameterDisplayOnly">
+									<PropertyValue Property="ValueListProperty" String="IsPrimaryCurrencyForISOCrcy"/>
+								</Record>
+							</Collection>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+			</Annotations>
+			<!-- Contract Monitoring -->
+			<Annotations Target="MM_PRC_OVP.C_Contract_OvpResult/AmountFulfillmentPercent">
+				<Annotation String="%" Term="Org.OData.Measures.V1.Unit"/>
+			</Annotations>
+			<Annotations Target="MM_PRC_OVP.C_Contract_OvpResult">
+				<Annotation String="%" Term="Org.OData.Measures.V1.Unit"/>
+				<Annotation Qualifier="" Term="UI.Identification">
+					<Collection>
+						<Record Type="UI.DataFieldForIntentBasedNavigation">
+							<Annotation EnumMember="UI.ImportanceType/High" Term="UI.Importance"/>
+							<PropertyValue Property="Label" String="{@i18n&gt;@CONTRACT_NAVIGATION}"/>
+							<PropertyValue Property="Criticality" String="UI.CriticalityType/Neutral"/>
+							<PropertyValue Property="SemanticObject" String="PurchaseContract"/>
+							<PropertyValue Property="Action" String="manage"/>
+						</Record>
+					</Collection>
+				</Annotation>
+				<Annotation Qualifier="_CTR_EVAL_LINE_ITEMS" Term="UI.LineItem">
+					<Collection>
+						<Record Type="UI.DataField">
+							<PropertyValue Property="Label" String="{@i18n&gt;@SUPPLIER}"/>
+							<PropertyValue Path="SupplierName" Property="Value"/>
+						</Record>
+						<Record Type="UI.DataField">
+							<PropertyValue Property="Label" String="{@i18n&gt;@PURCHASECONTRACT}"/>
+							<PropertyValue Path="PurchaseContract" Property="Value"/>
+						</Record>
+						<Record Type="UI.DataFieldForAnnotation">
+							<PropertyValue Property="Label" String="{@i18n&gt;@EXPIRY_DAYS}"/>
+							<PropertyValue AnnotationPath="@UI.DataPoint#_CTR_DataPoint_3" Property="Target"/>
+						</Record>
+						<Record Type="UI.DataFieldForAnnotation">
+							<PropertyValue Property="Label" String="{@i18n&gt;@TARGET_AMOUNT}"/>
+							<PropertyValue Property="Criticality" String="UI.CriticalityType/Positive"/>
+							<PropertyValue AnnotationPath="@UI.DataPoint#_CTR_DataPoint_2" Property="Target"/>
+						</Record>
+						<Record Type="UI.DataFieldForAnnotation">
+							<Annotation EnumMember="UI.ImportanceType/High" Term="UI.Importance"/>
+							<PropertyValue Property="Label" String="{@i18n&gt;@CONSUMED_PERCENTAGE}"/>
+							<PropertyValue Property="Criticality" String="UI.CriticalityType/Negative"/>
+							<PropertyValue AnnotationPath="@UI.DataPoint#_CTR_DataPoint_1" Property="Target"/>
+						</Record>
+					</Collection>
+				</Annotation>
+				<Annotation Qualifier="_CTR_DataPoint_2" Term="UI.DataPoint">
+					<Record Type="UI.DataPointType">
+						<!--<PropertyValue Property="Value">-->
+						<!--	<Apply Function="odata.concat">-->
+						<!--		<Path>PurchaseContractTargetAmount</Path>-->
+						<!--		<Path>DocumentCurrency</Path>-->
+						<!--	</Apply>-->
+						<!--</PropertyValue>-->
+						<PropertyValue Property="Title" String="{@i18n&gt;@TARGET_AMOUNT}"/>
+						<PropertyValue Path="TargetAmount" Property="Value"/>
+						<PropertyValue Property="ValueFormat">
+							<Record Type="UI.NumberFormat">
+								<PropertyValue Property="ScaleFactor" String=""/>
+								<PropertyValue Int="1" Property="NumberOfFractionalDigits"/>
+							</Record>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+				<Annotation Qualifier="_CTR_DataPoint_1" Term="UI.DataPoint">
+					<Record Type="UI.DataPointType">
+						<!--<PropertyValue Path="AmountFulfillmentPercent" Property="Value"/>-->
+						<!--<PropertyValue Property="Criticality" String="UI.CriticalityType/Negative"/>-->
+						<PropertyValue Property="Title" String="{@i18n&gt;@@@CONSUMED_PERCENTAGE}"/>
+						<PropertyValue Path="AmountFulfillmentPercent" Property="Value"/>
+						<PropertyValue Property="ValueFormat">
+							<Record Type="UI.NumberFormat">
+								<PropertyValue Property="ScaleFactor" String=""/>
+								<PropertyValue Int="1" Property="NumberOfFractionalDigits"/>
+							</Record>
+						</PropertyValue>
+						<PropertyValue Property="CriticalityCalculation">
+							<Record Type="UI.CriticalityCalculationType">
+								<PropertyValue EnumMember="UI.ImprovementDirectionType/Minimize" Property="ImprovementDirection"/>
+								<PropertyValue Decimal="400000" Property="ToleranceRangeHighValue" String="50"/>
+								<PropertyValue Decimal="500000" Property="DeviationRangeHighValue" String="80"/>
+							</Record>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+				<Annotation Term="com.sap.vocabularies.UI.v1.SelectionVariant" Qualifier="params1">
+					<Record Type="UI.SelectionVariantType">
+						<PropertyValue Property="SelectOptions">
+							<Collection>
+								<Record Type="UI.SelectOptionType">
+									<PropertyValue Property="PropertyName" PropertyPath="IsExpired">
+										<PropertyPath>IsExpired</PropertyPath>
+									</PropertyValue>
+									<PropertyValue Property="Ranges">
+										<Collection>
+											<Record Type="UI.SelectionRangeType">
+												<PropertyValue Property="Sign" EnumMember="UI.SelectionRangeSignType/I"/>
+												<PropertyValue Property="Option" EnumMember="UI.SelectionRangeOptionType/EQ"/>
+												<PropertyValue Property="Low" String="false"/>
+											</Record>
+										</Collection>
+									</PropertyValue>
+								</Record>
+							</Collection>
+						</PropertyValue>
+						<PropertyValue Property="Parameters">
+							<Collection>
+								<Record Type="com.sap.vocabularies.UI.v1.Parameter">
+									<PropertyValue Property="PropertyName" PropertyPath="P_DisplayCurrency"/>
+									<PropertyValue Property="PropertyValue" String=""/>
+								</Record>
+							</Collection>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+				<Annotation Qualifier="_CTR_DataPoint_3" Term="UI.DataPoint">
+					<Record Type="UI.DataPointType">
+						<PropertyValue Property="Title" String="{@i18n&gt;@@EXPIRY_DAYS}"/>
+						<PropertyValue Property="Value" Path="ValidityEndDate"/>
+						<PropertyValue Property="CriticalityCalculation">
+							<Record Type="UI.CriticalityCalculationType">
+								<PropertyValue Property="ImprovementDirection" EnumMember="UI.ImprovementDirectionType/Minimize"/>
+								<PropertyValue Property="ToleranceRangeHighValue" String="0"/>
+								<PropertyValue Property="DeviationRangeHighValue" String="0"/>
+							</Record>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+			</Annotations>
+			<!-- Overdue PR -->
+			<Annotations Target="MM_PRC_OVP.C_PurchaseRequisition_OvpResult">
+				<Annotation Qualifier="" Term="UI.Identification">
+					<Collection>
+						<Record Type="UI.DataFieldForIntentBasedNavigation">
+							<Annotation EnumMember="UI.ImportanceType/High" Term="UI.Importance"/>
+							<PropertyValue Property="Label" String="{@i18n&gt;@PR_NAVIGATION}"/>
+							<PropertyValue Property="SemanticObject" String="PurchaseRequisition">
+								<!--Changed from PurchaseRequisitionNoSource-->
+								<Annotation Term="UI.MultiLineText" Bool="false"/>
+							</PropertyValue>
+							<PropertyValue Property="Action" String="manage"/>
+						</Record>
+					</Collection>
+				</Annotation>
+				<Annotation Qualifier="PRDue" Term="UI.PresentationVariant">
+					<Record Type="UI.PresentationVariantType">
+						<PropertyValue Property="SortOrder">
+							<Collection>
+								<Record Type="Common.SortOrderType">
+									<Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+									<PropertyValue Property="Property" PropertyPath="FirstDeliveryDate">
+										<PropertyPath>FirstDeliveryDate</PropertyPath>
+									</PropertyValue>
+									<PropertyValue Property="Descending" Bool="false"/>
+								</Record>
+								<Record Type="Common.SortOrderType">
+									<Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+									<PropertyValue Property="Property" PropertyPath="PurReqnPrice">
+										<PropertyPath>PurReqnPrice</PropertyPath>
+									</PropertyValue>
+									<PropertyValue Property="Descending" Bool="true"/>
+								</Record>
+							</Collection>
+						</PropertyValue>
+						<PropertyValue Property="GroupBy">
+							<Collection/>
+						</PropertyValue>
+						<PropertyValue Property="TotalBy">
+							<Collection/>
+						</PropertyValue>
+						<PropertyValue Property="Total">
+							<Collection/>
+						</PropertyValue>
+						<PropertyValue Property="Visualizations">
+							<Collection/>
+						</PropertyValue>
+						<PropertyValue Property="RequestAtLeast">
+							<Collection/>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+				<Annotation Qualifier="_PR_Due_2" Term="UI.DataPoint">
+					<Record Type="UI.DataPointType">
+						<PropertyValue Property="Title" String="{@i18n&gt;@PR_QTY}"/>
+						<PropertyValue Path="RequestedQuantity" Property="Value"/>
+						<PropertyValue Property="ValueFormat">
+							<Record Type="UI.NumberFormat">
+								<PropertyValue Property="ScaleFactor" String=""/>
+								<PropertyValue Int="1" Property="NumberOfFractionalDigits"/>
+							</Record>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+				<Annotation Qualifier="_PR_Due_3" Term="UI.DataPoint">
+					<Record Type="UI.DataPointType">
+						<PropertyValue Property="Title" String="{@i18n&gt;@PRICE}"/>
+						<PropertyValue Path="PurReqnPrice" Property="Value"/>
+						<PropertyValue Property="ValueFormat">
+							<Record Type="UI.NumberFormat">
+								<PropertyValue Property="ScaleFactor" String=""/>
+								<PropertyValue Int="1" Property="NumberOfFractionalDigits"/>
+							</Record>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+				<Annotation Qualifier="_PR_DUE" Term="UI.LineItem">
+					<Collection>
+						<Record Type="UI.DataField">
+							<Annotation EnumMember="UI.ImportanceType/High" Term="UI.Importance"/>
+							<PropertyValue Property="Label" String="{@i18n&gt;@PR_TEXT}"/>
+							<PropertyValue Path="PurchaseRequisitionItemText" Property="Value"/>
+						</Record>
+						<Record Type="UI.DataField">
+							<Annotation EnumMember="UI.ImportanceType/High" Term="UI.Importance"/>
+							<PropertyValue Property="Label" String="{@i18n&gt;@PURCHASE_REQUISITION_NO/ITEM}"/>
+							<PropertyValue Path="FormattedPurRequisitionItem" Property="Value"/>
+						</Record>
+						<Record Type="UI.DataFieldForAnnotation">
+							<Annotation EnumMember="UI.ImportanceType/High" Term="UI.Importance"/>
+							<PropertyValue Property="Label" String="{@i18n&gt;@DUE_DAYS}"/>
+							<PropertyValue AnnotationPath="@UI.DataPoint#_PR_Due_1" Property="Target"/>
+						</Record>
+						<Record Type="UI.DataFieldForAnnotation">
+							<Annotation EnumMember="UI.ImportanceType/High" Term="UI.Importance"/>
+							<PropertyValue Property="Label" String="{@i18n&gt;@PR_QTY}"/>
+							<PropertyValue AnnotationPath="@UI.DataPoint#_PR_Due_2" Property="Target"/>
+						</Record>
+						<Record Type="UI.DataFieldForAnnotation">
+							<Annotation EnumMember="UI.ImportanceType/High" Term="UI.Importance"/>
+							<PropertyValue Property="Label" String="{@i18n&gt;@PRICE}"/>
+							<PropertyValue AnnotationPath="@UI.DataPoint#_PR_Due_3" Property="Target"/>
+						</Record>
+						<Record Type="UI.DataField">
+							<Annotation EnumMember="UI.ImportanceType/High" Term="UI.Importance"/>
+							<PropertyValue Path="OverdueDays" Property="Value"/>
+						</Record>
+						<Record Type="UI.DataField">
+							<Annotation EnumMember="UI.ImportanceType/High" Term="UI.Importance"/>
+							<PropertyValue Path="RequestedQuantity" Property="Value"/>
+						</Record>
+						<Record Type="UI.DataField">
+							<Annotation EnumMember="UI.ImportanceType/High" Term="UI.Importance"/>
+							<PropertyValue Path="PurReqnPrice" Property="Value"/>
+						</Record>
+						<Record Type="UI.DataField">
+							<Annotation EnumMember="UI.ImportanceType/Medium" Term="UI.Importance"/>
+							<PropertyValue Path="DisplayCurrency" Property="Value"/>
+						</Record>
+					</Collection>
+				</Annotation>
+				<Annotation Term="com.sap.vocabularies.UI.v1.SelectionVariant" Qualifier="params">
+					<Record Type="UI.SelectionVariantType">
+						<PropertyValue Property="SelectOptions">
+							<Collection>
+								<Record Type="UI.SelectOptionType">
+									<PropertyValue Property="PropertyName" PropertyPath="Supplier">
+										<PropertyPath>Supplier</PropertyPath>
+									</PropertyValue>
+									<PropertyValue Property="Ranges">
+										<Collection>
+											<Record Type="UI.SelectionRangeType">
+												<PropertyValue Property="Sign" EnumMember="UI.SelectionRangeSignType/I"/>
+												<PropertyValue Property="Option" EnumMember="UI.SelectionRangeOptionType/EQ"/>
+												<PropertyValue Property="Low" String=" "/>
+											</Record>
+										</Collection>
+									</PropertyValue>
+								</Record>
+								<Record Type="UI.SelectOptionType">
+									<PropertyValue Property="PropertyName" PropertyPath="FixedSupplier">
+										<PropertyPath>FixedSupplier</PropertyPath>
+									</PropertyValue>
+									<PropertyValue Property="Ranges">
+										<Collection>
+											<Record Type="UI.SelectionRangeType">
+												<PropertyValue Property="Sign" EnumMember="UI.SelectionRangeSignType/I"/>
+												<PropertyValue Property="Option" EnumMember="UI.SelectionRangeOptionType/EQ"/>
+												<PropertyValue Property="Low" String=" "/>
+											</Record>
+										</Collection>
+									</PropertyValue>
+								</Record>
+								<Record Type="UI.SelectOptionType">
+									<PropertyValue Property="PropertyName" PropertyPath="PurReqnHasFllwOnDoc">
+										<PropertyPath>PurReqnHasFllwOnDoc</PropertyPath>
+									</PropertyValue>
+									<PropertyValue Property="Ranges">
+										<Collection>
+											<Record Type="UI.SelectionRangeType">
+												<PropertyValue Property="Sign" EnumMember="UI.SelectionRangeSignType/I"/>
+												<PropertyValue Property="Option" EnumMember="UI.SelectionRangeOptionType/EQ"/>
+												<PropertyValue Property="Low" String=" "/>
+											</Record>
+										</Collection>
+									</PropertyValue>
+								</Record>
+							</Collection>
+						</PropertyValue>
+						<PropertyValue Property="Parameters">
+							<Collection>
+								<Record Type="com.sap.vocabularies.UI.v1.Parameter">
+									<PropertyValue Property="PropertyName" PropertyPath="P_DisplayCurrency"/>
+									<PropertyValue Property="PropertyValue" String=""/>
+								</Record>
+							</Collection>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+				<Annotation Term="UI.SelectionVariant" Qualifier="filterStatus">
+					<Record Type="UI.SelectionVariantType">
+						<PropertyValue Property="SelectOptions">
+							<Collection>
+								<Record Type="UI.SelectOptionType">
+									<PropertyValue Property="PropertyName">
+										<PropertyPath>PurReqnHasFllwOnDoc</PropertyPath>
+									</PropertyValue>
+									<PropertyValue Property="Ranges">
+										<Collection>
+											<Record Type="UI.SelectionRangeType">
+												<PropertyValue Property="Sign" EnumMember="UI.SelectionRangeSignType/I"/>
+												<PropertyValue Property="Option" EnumMember="UI.SelectionRangeOptionType/EQ"/>
+												<PropertyValue Property="Low" String=" "/>
+											</Record>
+										</Collection>
+									</PropertyValue>
+								</Record>
+							</Collection>
+						</PropertyValue>
+						<PropertyValue Property="Parameters">
+							<Collection>
+								<Record Type="com.sap.vocabularies.UI.v1.Parameter">
+									<PropertyValue Property="PropertyName" PropertyPath="P_DisplayCurrency"/>
+									<PropertyValue Property="PropertyValue" String=""/>
+								</Record>
+							</Collection>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+				<Annotation Qualifier="_PR_Due_1" Term="UI.DataPoint">
+					<Record Type="UI.DataPointType">
+						<PropertyValue Property="Title" String="{@i18n&gt;@OVERDUEDAYS}"/>
+						<PropertyValue Property="Value" Path="FirstDeliveryDate"/>
+						<PropertyValue Property="CriticalityCalculation">
+							<Record Type="UI.CriticalityCalculationType">
+								<PropertyValue Property="ImprovementDirection" EnumMember="UI.ImprovementDirectionType/Minimize"/>
+								<PropertyValue Property="ToleranceRangeHighValue" String="0"/>
+							</Record>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+			</Annotations>
+			<!-- Supplier Evaluation Overall -->
+			<!-- Supplier Evaluation -->
+			<Annotations Target=" MM_PRC_OVP.C_SupplierEvalOverallOvwPgResult ">
+				<Annotation Term=" UI.SelectionVariant " Qualifier=" _SAP_MM_PUR_OVERALLSUPPLIEREVALUATION ">
+					<Record>
+						<PropertyValue Property=" ID " String=" .SAP.MM.PUR.OVERALLSUPPLIEREVALUATION "/>
+						<PropertyValue Property=" Text " String=" Overall Supplier Evaluation "/>
+						<PropertyValue Property=" Parameters ">
+							<Collection>
+								<Record Type=" UI.Parameter ">
+									<PropertyValue Property=" PropertyName " PropertyPath=" Parameters/P_DisplayCurrency "/>
+									<PropertyValue Property=" PropertyValue " String=" EUR "/>
+								</Record>
+								<Record Type=" UI.Parameter ">
+									<PropertyValue Property=" PropertyName " PropertyPath=" Parameters/P_DateFunction "/>
+									<PropertyValue Property=" PropertyValue " String=" PREVIOUSYEARTODATE "/>
+								</Record>
+							</Collection>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+				<Annotation Term="UI.Identification" Qualifier="_SAP_MM_PUR_OVERALLSUPPLIEREVALUATION">
+					<Collection>
+						<Record Type="UI.DataFieldForIntentBasedNavigation">
+							<PropertyValue Property="SemanticObject" String="SupplierPerformance"/>
+							<PropertyValue Property="Action" String="analyzeSBKPIDetailsS4H"/>
+						</Record>
+					</Collection>
+				</Annotation>
+				<Annotation Term=" UI.PresentationVariant " Qualifier=" _SAP_MM_PUR_OVERALLSUPPLIEREVALUATION__BYSUPPLIER ">
+					<Record>
+						<PropertyValue Property=" ID " String=" .BYSUPPLIER "/>
+						<PropertyValue Property=" Text " String=" Questionnaire Score and Operational Score by Supplier "/>
+						<PropertyValue Property=" Visualizations ">
+							<Collection>
+								<AnnotationPath>
+									@UI.Chart#_SAP_MM_PUR_OVERALLSUPPLIEREVALUATION__BYSUPPLIER
+								</AnnotationPath>
+							</Collection>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+				<Annotation Term=" UI.Chart " Qualifier=" _SAP_MM_PUR_OVERALLSUPPLIEREVALUATION__BYSUPPLIER ">
+					<Record Type=" UI.ChartDefinitionType ">
+						<PropertyValue Property=" Title " String=" Questionnaire Score and Operational Score by Supplier "/>
+						<PropertyValue Property=" MeasureAttributes ">
+							<Collection>
+								<Record Type=" UI.ChartMeasureAttributeType ">
+									<PropertyValue Property=" Measure " PropertyPath=" SupplierFeedbackScore "/>
+									<PropertyValue Property=" Role " EnumMember=" UI.ChartMeasureRoleType/Axis1 "/>
+								</Record>
+								<Record Type=" UI.ChartMeasureAttributeType ">
+									<PropertyValue Property=" Measure " PropertyPath=" SupplierOperationalScore "/>
+									<PropertyValue Property=" Role " EnumMember=" UI.ChartMeasureRoleType/Axis2 "/>
+								</Record>
+								<Record Type=" UI.ChartMeasureAttributeType ">
+									<PropertyValue Property=" Measure " PropertyPath=" PurchaseOrderNetPriceAmount "/>
+									<PropertyValue Property=" Role " EnumMember=" UI.ChartMeasureRoleType/Axis2 "/>
+								</Record>
+							</Collection>
+						</PropertyValue>
+						<PropertyValue Property=" Measures ">
+							<Collection>
+								<PropertyPath>
+									SupplierFeedbackScore
+								</PropertyPath>
+								<PropertyPath>
+									SupplierOperationalScore
+								</PropertyPath>
+								<PropertyPath>
+									PurchaseOrderNetPriceAmount
+								</PropertyPath>
+							</Collection>
+						</PropertyValue>
+						<PropertyValue Property=" DimensionAttributes ">
+							<Collection>
+								<Record Type=" UI.ChartDimensionAttributeType ">
+									<PropertyValue Property=" Dimension " PropertyPath=" Supplier "/>
+									<PropertyValue Property=" Role " EnumMember=" UI.ChartDimensionRoleType/Series "/>
+								</Record>
+							</Collection>
+						</PropertyValue>
+						<PropertyValue Property=" Dimensions ">
+							<Collection>
+								<PropertyPath>
+									Supplier
+								</PropertyPath>
+							</Collection>
+						</PropertyValue>
+						<PropertyValue Property=" ChartType " EnumMember=" UI.ChartType/Bubble "/>
+					</Record>
+				</Annotation>
+			</Annotations>
+			<Annotations Target="MM_PRC_OVP.C_OperationalEvalSupplierScoreResult">
+				<Annotation Qualifier="SupplierEvaluation" Term="UI.Identification">
+					<Collection>
+						<Record Type="UI.DataFieldForIntentBasedNavigation">
+							<PropertyValue Property="Criticality" String="UI.CriticalityType/Neutral"/>
+							<Annotation EnumMember="UI.ImportanceType/High" Term="UI.Importance"/>
+							<PropertyValue Property="SemanticObject" String="SupplierPerformance"/>
+							<PropertyValue Property="Action" String="analyzeSBKPIDetailsS4HANA"/>
+							<PropertyValue Property="Label" String="Supplier Evaluation"/>
+						</Record>
+					</Collection>
+				</Annotation>
+				<Annotation Qualifier="SupplierEvaluationTrend" Term="UI.Identification">
+					<Collection>
+						<Record Type="UI.DataFieldForIntentBasedNavigation">
+							<PropertyValue Property="Criticality" String="UI.CriticalityType/Neutral"/>
+							<Annotation EnumMember="UI.ImportanceType/High" Term="UI.Importance"/>
+							<PropertyValue Property="SemanticObject" String="SupplierPerformance"/>
+							<PropertyValue Property="Action" String="analyzeKPIDetailsS4HANA"/>
+							<PropertyValue Property="Label" String="Supplier Evaluation"/>
+						</Record>
+					</Collection>
+				</Annotation>
+				<Annotation Qualifier="_SAP_MM_PUR_SUPPLIEREVALUATION" Term="UI.DataPoint">
+					<Record Type="UI.DataPointType">
+						<!--<PropertyValue Path="SupplierEvaluationScore" Property="Value"/>-->
+						<!-- Main Measure removed from chart card -->
+						<PropertyValue Property="ValueFormat">
+							<Record>
+								<PropertyValue Property="ScaleFactor" String=""/>
+								<PropertyValue Int="0" Property="NumberOfFractionalDigits"/>
+							</Record>
+						</PropertyValue>
+						<PropertyValue Property="CriticalityCalculation">
+							<Record>
+								<PropertyValue EnumMember="UI.ImprovementDirectionType/Maximize" Property="ImprovementDirection"/>
+							</Record>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+				<Annotation Qualifier="_SAP_MM_PUR_SUPPLIEREVALUATION__BYSUPPLIER" Term="UI.PresentationVariant">
+					<Record>
+						<PropertyValue Int32="10" Property="MaxItems"/>
+						<PropertyValue Property="ID" String=".BYSUPPLIER"/>
+						<PropertyValue Property="SortOrder">
+							<Collection>
+								<Record>
+									<PropertyValue Property="Property" PropertyPath="PurchaseOrderNetPriceAmount"/>
+									<PropertyValue Boolean="true" Property="Descending"/>
+								</Record>
+							</Collection>
+						</PropertyValue>
+						<PropertyValue Property="Visualizations">
+							<Collection>
+								<AnnotationPath>UI.Chart#_SAP_MM_PUR_SUPPLIEREVALUATION__BYSUPPLIER</AnnotationPath>
+							</Collection>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+				<Annotation Qualifier="_SAP_MM_PUR_SUPPLIEREVALUATION__TRENDBYSUPPLIER" Term="UI.PresentationVariant">
+					<Record>
+						<PropertyValue Property="ID" String=".TRENDBYSUPPLIER"/>
+						<PropertyValue Property="Text" String="Trend By Supplier"/>
+						<PropertyValue Property="SortOrder">
+							<Collection>
+								<Record>
+									<PropertyValue Property="Property" PropertyPath="CalendarYear"/>
+									<PropertyValue Boolean="false" Property="Descending"/>
+								</Record>
+								<Record>
+									<PropertyValue Property="Property" PropertyPath="CalendarQuarter"/>
+									<PropertyValue Boolean="false" Property="Descending"/>
+								</Record>
+							</Collection>
+						</PropertyValue>
+						<PropertyValue Property="Visualizations">
+							<Collection>
+								<AnnotationPath>@UI.Chart#_SAP_MM_PUR_SUPPLIEREVALUATION__TRENDBYSUPPLIER</AnnotationPath>
+							</Collection>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+				<Annotation Qualifier="_SAP_MM_PUR_SUPPLIEREVALUATION__BYSUPPLIER" Term="UI.Chart">
+					<Record Type="UI.ChartDefinitionType">
+						<PropertyValue Property="MeasureAttributes">
+							<Collection>
+								<Record Type="UI.ChartMeasureAttributeType">
+									<PropertyValue Property="Measure" PropertyPath="PurchaseOrderNetPriceAmount"/>
+									<PropertyValue EnumMember="UI.ChartMeasureRoleType/Axis2" Property="Role"/>
+								</Record>
+								<Record Type="UI.ChartMeasureAttributeType">
+									<PropertyValue Property="Measure" PropertyPath="SupplierOperationalScore"/>
+									<PropertyValue EnumMember="UI.ChartMeasureRoleType/Axis2" Property="Role"/>
+								</Record>
+							</Collection>
+						</PropertyValue>
+						<PropertyValue Property="Measures">
+							<Collection>
+								<PropertyPath>PurchaseOrderNetPriceAmount</PropertyPath>
+								<PropertyPath>SupplierOperationalScore</PropertyPath>
+							</Collection>
+						</PropertyValue>
+						<PropertyValue Property="DimensionAttributes">
+							<Collection>
+								<Record Type="UI.ChartDimensionAttributeType">
+									<PropertyValue Property="Dimension" PropertyPath="Supplier"/>
+									<PropertyValue EnumMember="UI.ChartDimensionRoleType/Series" Property="Role"/>
+								</Record>
+							</Collection>
+						</PropertyValue>
+						<PropertyValue Property="Dimensions">
+							<Collection>
+								<PropertyPath>Supplier</PropertyPath>
+							</Collection>
+						</PropertyValue>
+						<PropertyValue EnumMember="UI.ChartType/Scatter" Property="ChartType"/>
+						<PropertyValue Property="Title" String="{@i18n&gt;@OPERATIONAL_SCORE_AND_PURCHASING_SPEND_BY_SUPPLIER}"/>
+					</Record>
+				</Annotation>
+			</Annotations>
+			<!-- PurchaseOrderValue -->
+			<Annotations Target="MM_PRC_OVP.C_PurOrdValueWithPlndResult">
+				<!--Start of Performance Improvemnet-->
+				<!--For Material Group-->
+				<!--For Material Group-->
+				<!--End of Performance Improvement-->
+				<Annotation Qualifier="PurOrdValue_Materialgroup" Term="UI.LineItem">
+					<Collection>
+						<Record Type="UI.DataField">
+							<Annotation EnumMember="UI.ImportanceType/High" Term="UI.Importance"/>
+							<PropertyValue Path="MaterialGroupName" Property="Value"/>
+						</Record>
+						<Record Type="UI.DataField">
+							<Annotation EnumMember="UI.ImportanceType/High" Term="UI.Importance"/>
+							<PropertyValue Path="MaterialGroup" Property="Value"/>
+						</Record>
+						<Record Type="UI.DataFieldForAnnotation">
+							<Annotation EnumMember="UI.ImportanceType/High" Term="UI.Importance"/>
+							<PropertyValue AnnotationPath="@UI.DataPoint#PurOrdValue_NetAmount" Property="Target"/>
+						</Record>
+						<Record Type="UI.DataField">
+							<Annotation EnumMember="UI.ImportanceType/High" Term="UI.Importance"/>
+							<PropertyValue Path="PurOrdNetAmountInDisplayCrcy" Property="Value"/>
+						</Record>
+						<Record Type="UI.DataField">
+							<Annotation EnumMember="UI.ImportanceType/Medium" Term="UI.Importance"/>
+							<PropertyValue Path="DisplayCurrency" Property="Value"/>
+						</Record>
+					</Collection>
+				</Annotation>
+				<Annotation Qualifier="PurOrdValue_NetAmount" Term="UI.DataPoint">
+					<Record>
+						<PropertyValue Path="PurOrdNetAmountInDisplayCrcy" Property="Value"/>
+						<PropertyValue Property="Criticality" EnumMember="UI.CriticalityType/Positive"/>
+						<PropertyValue Property="ValueFormat">
+							<Record>
+								<PropertyValue Property="ScaleFactor" String=""/>
+								<PropertyValue Int="1" Property="NumberOfFractionalDigits"/>
+							</Record>
+						</PropertyValue>
+						<PropertyValue Path="PurOrdNetAmountInDisplayCrcy" Property="TargetValue"/>
+						<PropertyValue Property="Trend" String="UI.TrendType/StrongUp"/>
+					</Record>
+				</Annotation>
+				<Annotation Qualifier="PurOrdValue_NetAmountTrend" Term="UI.DataPoint">
+					<Record>
+						<!--<PropertyValue Path="PurOrdNetAmountInDisplayCrcy" Property="Value"/>-->
+						<!--<PropertyValue Property="Criticality" String="UI.CriticalityType/Positive"/>-->
+						<!--<PropertyValue Path="PurOrdNetAmountInDisplayCrcy" Property="TargetValue"/>-->
+						<!--<PropertyValue Property="Trend" String="UI.TrendType/StrongUp"/>-->
+						<PropertyValue Property="ValueFormat">
+							<Record>
+								<PropertyValue Property="ScaleFactor" String=""/>
+								<PropertyValue Int="1" Property="NumberOfFractionalDigits"/>
+							</Record>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+				<Annotation Qualifier="PurOrdValue_Supplier" Term="UI.LineItem">
+					<Collection>
+						<Record Type="UI.DataFieldForAnnotation">
+							<Annotation EnumMember="UI.ImportanceType/High" Term="UI.Importance"/>
+							<PropertyValue AnnotationPath="@UI.DataPoint#PurOrdValue_NetAmount" Property="Target"/>
+						</Record>
+						<Record Type="UI.DataField">
+							<Annotation EnumMember="UI.ImportanceType/High" Term="UI.Importance"/>
+							<PropertyValue Path="SupplierName" Property="Value"/>
+						</Record>
+						<Record Type="UI.DataField">
+							<Annotation EnumMember="UI.ImportanceType/High" Term="UI.Importance"/>
+							<PropertyValue Path="Supplier" Property="Value"/>
+						</Record>
+						<Record Type="UI.DataField">
+							<Annotation EnumMember="UI.ImportanceType/Medium" Term="UI.Importance"/>
+							<PropertyValue Path="DisplayCurrency" Property="Value"/>
+						</Record>
+						<Record Type="UI.DataField">
+							<Annotation EnumMember="UI.ImportanceType/High" Term="UI.Importance"/>
+							<PropertyValue Path="PurOrdNetAmountInDisplayCrcy" Property="Value"/>
+						</Record>
+					</Collection>
+				</Annotation>
+				<Annotation Qualifier="PurchasingSpend" Term="UI.Identification">
+					<Collection>
+						<Record Type="UI.DataFieldForIntentBasedNavigation">
+							<PropertyValue Property="Criticality" EnumMember="UI.CriticalityType/Neutral"/>
+							<Annotation EnumMember="UI.ImportanceType/High" Term="UI.Importance"/>
+							<PropertyValue Property="SemanticObject" String="PurchaseOrder"/>
+							<PropertyValue Property="Action" String="analyzeSBKPIDetailsS4HANA"/>
+							<PropertyValue Property="Label" String="Purchase Order Value"/>
+						</Record>
+					</Collection>
+				</Annotation>
+				<Annotation Qualifier="PurchasingSpend1" Term="UI.Identification">
+					<Collection>
+						<Record Type="UI.DataFieldForIntentBasedNavigation">
+							<PropertyValue Property="Criticality" EnumMember="UI.CriticalityType/Neutral"/>
+							<Annotation EnumMember="UI.ImportanceType/High" Term="UI.Importance"/>
+							<PropertyValue Property="SemanticObject" String="PurchaseOrder"/>
+							<PropertyValue Property="Action" String="analyzeKPIDetailsS4HANA"/>
+							<PropertyValue Property="Label" String="Purchase Order Value"/>
+						</Record>
+					</Collection>
+				</Annotation>
+				<Annotation Qualifier="PurchasingSpendTrend" Term="UI.Identification">
+					<Collection>
+						<Record Type="UI.DataFieldForIntentBasedNavigation">
+							<PropertyValue Property="Criticality" String="UI.CriticalityType/Neutral"/>
+							<Annotation EnumMember="UI.ImportanceType/High" Term="UI.Importance"/>
+							<PropertyValue Property="SemanticObject" String="PurchaseOrder"/>
+							<PropertyValue Property="Action" String="analyzeKPIS4HANA"/>
+							<PropertyValue Property="Label" String="Purchase Order Value"/>
+						</Record>
+					</Collection>
+				</Annotation>
+				<Annotation Term="UI.PresentationVariant" Qualifier="PurchasingSpend_Supplier">
+					<Record>
+						<!--<PropertyValue Property="SortOrder" Path="@Common.SortOrder#PurchasingSpend"/>-->
+						<PropertyValue Property="MaxItems" Int="5"/>
+						<PropertyValue Property="ID" String=".BYTOUCHTYPE"/>
+						<PropertyValue Property="Text" String="By Touch Type"/>
+						<PropertyValue Property="GroupBy">
+							<Collection>
+								<PropertyPath>Supplier</PropertyPath>
+							</Collection>
+						</PropertyValue>
+						<PropertyValue Property="SortOrder">
+							<Collection>
+								<Record>
+									<PropertyValue Property="Property" PropertyPath="PurOrdNetAmountInDisplayCrcy"/>
+									<PropertyValue Property="Descending" Boolean="true"/>
+								</Record>
+							</Collection>
+						</PropertyValue>
+						<PropertyValue Property="Visualizations">
+							<Collection>
+								<AnnotationPath>@UI.Chart#PurchasingSpend_Supplier</AnnotationPath>
+								<AnnotationPath>@UI.DataPoint#_SAP_MM_PRC_OVP_PURCHASEORDERVALUE_EVAL</AnnotationPath>
+							</Collection>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+				<Annotation Term="UI.PresentationVariant" Qualifier="PurchasingSpend_MaterialGroup">
+					<Record>
+						<!--<PropertyValue Property="SortOrder" Path="@Common.SortOrder#PurchasingSpend"/>-->
+						<PropertyValue Property="MaxItems" Int="5"/>
+						<PropertyValue Property="ID" String=".BYTOUCHTYPE"/>
+						<PropertyValue Property="Text" String="By Touch Type"/>
+						<PropertyValue Property="GroupBy">
+							<Collection>
+								<PropertyPath>MaterialGroup</PropertyPath>
+							</Collection>
+						</PropertyValue>
+						<PropertyValue Property="SortOrder">
+							<Collection>
+								<Record>
+									<PropertyValue Property="Property" PropertyPath="PurOrdNetAmountInDisplayCrcy"/>
+									<PropertyValue Property="Descending" Boolean="true"/>
+								</Record>
+							</Collection>
+						</PropertyValue>
+						<PropertyValue Property="Visualizations">
+							<Collection>
+								<AnnotationPath>@UI.Chart#PurchasingSpend_MaterialGroup</AnnotationPath>
+								<AnnotationPath>@UI.DataPoint#_SAP_MM_PRC_OVP_PURCHASEORDERVALUE_EVAL</AnnotationPath>
+							</Collection>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+				<Annotation Term="UI.Chart" Qualifier="PurchasingSpend_Supplier">
+					<Record Type="UI.ChartDefinitionType">
+						<PropertyValue Property="Title" String="PO Net Amount By Supplier"/>
+						<PropertyValue Property="ChartType" EnumMember="UI.ChartType/Column"/>
+						<PropertyValue Property="MeasureAttributes">
+							<Collection>
+								<Record Type="UI.ChartMeasureAttributeType">
+									<PropertyValue Property="Measure" PropertyPath="PurOrdNetAmountInDisplayCrcy"/>
+									<PropertyValue Property="Role" EnumMember="UI.ChartMeasureRoleType/Axis1"/>
+								</Record>
+							</Collection>
+						</PropertyValue>
+						<PropertyValue Property="DimensionAttributes">
+							<Collection>
+								<Record Type="UI.ChartDimensionAttributeType">
+									<PropertyValue Property="Dimension" PropertyPath="Supplier"/>
+									<PropertyValue Property="Role" EnumMember="UI.ChartDimensionRoleType/Category"/>
+								</Record>
+							</Collection>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+				<Annotation Term="UI.Chart" Qualifier="PurchasingSpend_MaterialGroup">
+					<Record Type="UI.ChartDefinitionType">
+						<PropertyValue Property="Title" String="PO Net Amount By Material Group"/>
+						<PropertyValue Property="ChartType" EnumMember="UI.ChartType/Column"/>
+						<PropertyValue Property="MeasureAttributes">
+							<Collection>
+								<Record Type="UI.ChartMeasureAttributeType">
+									<PropertyValue Property="Measure" PropertyPath="PurOrdNetAmountInDisplayCrcy"/>
+									<PropertyValue Property="Role" EnumMember="UI.ChartMeasureRoleType/Axis1"/>
+								</Record>
+							</Collection>
+						</PropertyValue>
+						<PropertyValue Property="DimensionAttributes">
+							<Collection>
+								<Record Type="UI.ChartDimensionAttributeType">
+									<PropertyValue Property="Dimension" PropertyPath="MaterialGroup"/>
+									<PropertyValue Property="Role" EnumMember="UI.ChartDimensionRoleType/Category"/>
+								</Record>
+							</Collection>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+				<Annotation Qualifier="_SAP_MM_PRC_OVP_PURCHASEORDERVALUE_EVAL__BYSUPPLIER" Term="UI.PresentationVariant">
+					<Record>
+						<PropertyValue Property="ID" String=".BYSUPPLIER"/>
+						<PropertyValue Property="SortOrder">
+							<Collection>
+								<Record>
+									<PropertyValue Property="Property" PropertyPath="CalendarYear"/>
+									<PropertyValue Boolean="false" Property="Descending"/>
+								</Record>
+								<Record>
+									<PropertyValue Property="Property" PropertyPath="CalendarQuarter"/>
+									<PropertyValue Boolean="false" Property="Descending"/>
+								</Record>
+							</Collection>
+						</PropertyValue>
+						<PropertyValue Property="Visualizations">
+							<Collection>
+								<AnnotationPath>@UI.Chart#_SAP_MM_PRC_OVP_PURCHASEORDERVALUE_EVAL__BYSUPPLIER</AnnotationPath>
+							</Collection>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+				<Annotation Qualifier="_SAP_MM_PRC_OVP_PURCHASEORDERVALUE_EVAL__BYPURCHASINGCATEGORY" Term="UI.PresentationVariant">
+					<Record>
+						<PropertyValue Property="ID" String=".BYPURCHASINGCATEGORY"/>
+						<PropertyValue Property="SortOrder">
+							<Collection>
+								<Record>
+									<PropertyValue Property="Property" PropertyPath="CalendarYear"/>
+									<PropertyValue Boolean="false" Property="Descending"/>
+								</Record>
+								<Record>
+									<PropertyValue Property="Property" PropertyPath="CalendarQuarter"/>
+									<PropertyValue Boolean="false" Property="Descending"/>
+								</Record>
+							</Collection>
+						</PropertyValue>
+						<PropertyValue Property="Visualizations">
+							<Collection>
+								<AnnotationPath>@UI.Chart#_SAP_MM_PRC_OVP_PURCHASEORDERVALUE_EVAL__BYPURCHASINGCATEGORY</AnnotationPath>
+							</Collection>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+			</Annotations>
+			<!-- Requisition Item Types -->
+			<Annotations Target="MM_PRC_OVP.C_PurReqnItemTypeAnalysisResult">
+				<Annotation Term="UI.DataPoint" Qualifier="_SAP_MM_PRC_REQUISITIONITEMTYPE">
+					<Record Type="UI.DataPointType">
+						<!--<PropertyValue Property="Title" String="Overview Pages for Procurement"/>-->
+						<!--<PropertyValue Property="Value" Path="NmbrOfFreeTxtItmCrtedFrmSSP"/>-->
+						<!--<PropertyValue Property="CriticalityCalculation">-->
+						<!--	<Record>-->
+						<!--		<PropertyValue Property="ImprovementDirection" EnumMember="UI.ImprovementDirectionType/Maximize"/>-->
+						<!--		<PropertyValue Property="DeviationRangeLowValue" Decimal="10"/>-->
+						<!--		<PropertyValue Property="ToleranceRangeLowValue" Decimal="20"/>-->
+						<!--	</Record>-->
+						<!--</PropertyValue>-->
+						<!--<PropertyValue Property="TargetValue" Decimal="30"/>-->
+						<PropertyValue Property="ValueFormat">
+							<Record>
+								<PropertyValue Property="ScaleFactor" String=""/>
+								<PropertyValue Property="NumberOfFractionalDigits" Int="0"/>
+							</Record>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+				<Annotation Term="UI.PresentationVariant" Qualifier="_SAP_MM_PRC_REQUISITIONITEMTYPE__BYITEMTYPE">
+					<Record>
+						<PropertyValue Property="ID" String=".BYITEMTYPE"/>
+						<PropertyValue Property="Visualizations">
+							<Collection>
+								<AnnotationPath>
+									@UI.Chart#_SAP_MM_PRC_REQUISITIONITEMTYPE__BYITEMTYPE
+								</AnnotationPath>
+								<AnnotationPath>
+									@UI.DataPoint#_SAP_MM_PRC_REQUISITIONITEMTYPE
+								</AnnotationPath>
+							</Collection>
+						</PropertyValue>
+						<PropertyValue Property="SortOrder" Path="@Common.SortOrder#_SAP_MM_PRC_REQUISITIONITEMTYPE__BYITEMTYPE"/>
+					</Record>
+				</Annotation>
+				<Annotation Term="UI.Chart" Qualifier="_SAP_MM_PRC_REQUISITIONITEMTYPE__BYITEMTYPE">
+					<Record Type="UI.ChartDefinitionType">
+						<PropertyValue Property="Title" String=" "/>
+						<PropertyValue Property="MeasureAttributes">
+							<Collection>
+								<Record Type="UI.ChartMeasureAttributeType">
+									<PropertyValue Property="Measure" PropertyPath="PurReqnItemClassfctnCount"/>
+									<PropertyValue Property="Role" EnumMember="UI.ChartMeasureRoleType/Axis2"/>
+								</Record>
+							</Collection>
+						</PropertyValue>
+						<PropertyValue Property="Measures">
+							<Collection>
+								<PropertyPath>PurReqnItemClassfctnCount</PropertyPath>
+							</Collection>
+						</PropertyValue>
+						<PropertyValue Property="DimensionAttributes">
+							<Collection>
+								<Record Type="UI.ChartDimensionAttributeType">
+									<PropertyValue Property="Dimension" PropertyPath="PurReqnItemClassification"/>
+									<PropertyValue Property="Role" EnumMember="UI.ChartDimensionRoleType/Category"/>
+								</Record>
+							</Collection>
+						</PropertyValue>
+						<PropertyValue Property="Dimensions">
+							<Collection>
+								<PropertyPath>PurReqnItemClassification</PropertyPath>
+							</Collection>
+						</PropertyValue>
+						<PropertyValue Property="ChartType" EnumMember="UI.ChartType/Donut"/>
+					</Record>
+				</Annotation>
+			</Annotations>
+			<!-- No touch rate -->
+			<Annotations Target="MM_PRC_OVP.C_PurRequisitionNoTouchResult">
+				<Annotation Term="UI.DataPoint" Qualifier="_SAP_MM_PRC_REQNNOTOUCHRATE_EVAL">
+					<Record Type="UI.DataPointType">
+						<!--<PropertyValue Property="Title" String="Overview Pages for Procurement"/>-->
+						<!--<PropertyValue Property="Value" Path="NoTouchRatio"/>-->
+						<!--<PropertyValue Property="CriticalityCalculation">-->
+						<!--	<Record>-->
+						<!--		<PropertyValue Property="ImprovementDirection" EnumMember="UI.ImprovementDirectionType/Maximize"/>-->
+						<!--	</Record>-->
+						<!--</PropertyValue>-->
+						<PropertyValue Property="ValueFormat">
+							<Record>
+								<PropertyValue Property="ScaleFactor" String=""/>
+								<PropertyValue Property="NumberOfFractionalDigits" Int="0"/>
+							</Record>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+				<Annotation Term="com.sap.vocabularies.UI.v1.HeaderInfo">
+					<Record>
+						<PropertyValue Property="Title">
+							<Record Type="com.sap.vocabularies.UI.v1.DataField">
+								<PropertyValue Property="Value" PropertyPath="PurReqnNoTouchType"/>
+							</Record>
+						</PropertyValue>
+						<PropertyValue Property="Description">
+							<Record Type="UI.DataField">
+								<PropertyValue Property="Value" Path="NmbrOfPurReqnWithNoTouch"/>
+							</Record>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+				<Annotation Term="UI.PresentationVariant" Qualifier="_SAP_MM_PRC_REQNNOTOUCHRATE_EVAL__BYTOUCHTYPE">
+					<Record>
+						<PropertyValue Property="ID" String=".BYTOUCHTYPE"/>
+						<PropertyValue Property="Text" String="By Touch Type"/>
+						<PropertyValue Property="Visualizations">
+							<Collection>
+								<AnnotationPath>@UI.Chart#_SAP_MM_PRC_REQNNOTOUCHRATE_EVAL__BYTOUCHTYPE</AnnotationPath>
+								<AnnotationPath>@UI.DataPoint#_SAP_MM_PRC_REQNNOTOUCHRATE_EVAL</AnnotationPath>
+							</Collection>
+						</PropertyValue>
+						<PropertyValue Property="SortOrder" Path="@Common.SortOrder#_SAP_MM_PRC_REQNNOTOUCHRATE_EVAL__BYTOUCHTYPE"/>
+					</Record>
+				</Annotation>
+				<Annotation Term="UI.Chart" Qualifier="_SAP_MM_PRC_REQNNOTOUCHRATE_EVAL__BYTOUCHTYPE">
+					<Record Type="UI.ChartDefinitionType">
+						<PropertyValue Property="Title" String=" "/>
+						<PropertyValue Property="MeasureAttributes">
+							<Collection>
+								<Record Type="UI.ChartMeasureAttributeType">
+									<PropertyValue Property="Measure" PropertyPath="PurchaseRequisitionItemCount"/>
+									<PropertyValue Property="Role" EnumMember="UI.ChartMeasureRoleType/Axis2"/>
+								</Record>
+							</Collection>
+						</PropertyValue>
+						<PropertyValue Property="Measures">
+							<Collection>
+								<PropertyPath>PurchaseRequisitionItemCount</PropertyPath>
+							</Collection>
+						</PropertyValue>
+						<PropertyValue Property="DimensionAttributes">
+							<Collection>
+								<Record Type="UI.ChartDimensionAttributeType">
+									<PropertyValue Property="Dimension" PropertyPath="PurReqnNoTouchType"/>
+									<PropertyValue Property="Role" EnumMember="UI.ChartDimensionRoleType/Category"/>
+								</Record>
+							</Collection>
+						</PropertyValue>
+						<PropertyValue Property="Dimensions">
+							<Collection>
+								<PropertyPath>PurReqnNoTouchType</PropertyPath>
+							</Collection>
+						</PropertyValue>
+						<PropertyValue Property="ChartType" EnumMember="UI.ChartType/Donut"/>
+					</Record>
+				</Annotation>
+				<Annotation Term="Common.SortOrder" Qualifier="_SAP_MM_PRC_REQNNOTOUCHRATE_EVAL__BYTOUCHTYPE">
+					<Collection>
+						<Record>
+							<PropertyValue Property="Property" PropertyPath="PurReqnNoTouchType"/>
+							<PropertyValue Property="Descending" Bool="false"/>
+						</Record>
+					</Collection>
+				</Annotation>
+			</Annotations>
+			<!-- Open Supplier Activities -->
+			<Annotations Target="MM_PRC_OVP.C_SupplierActivityOVPType">
+				<Annotation Term="UI.Facets" Qualifier="SupplierActivity">
+					<Collection>
+						<Record Type="UI.ReferenceFacet">
+							<!--PropertyValue Property="ID" String="Facet1"/>
+								<Annotation Term="UI.IsSummary" String="true"/-->
+							<Annotation Term="com.sap.vocabularies.UI.v1.IsSummary"/>
+							<PropertyValue Property="Label" String="Activity Label"/>
+							<PropertyValue Property="Target" AnnotationPath="@com.sap.vocabularies.UI.v1.FieldGroup#Activity"/>
+						</Record>
+						<Record Type="UI.ReferenceFacet">
+							<!--PropertyValue Property="ID" String="Facet1"/>
+								<Annotation Term="UI.IsSummary" String="true"/-->
+							<Annotation Term="com.sap.vocabularies.UI.v1.IsSummary"/>
+							<PropertyValue Property="Label" String="Activity Label"/>
+							<PropertyValue Property="Target" AnnotationPath="@com.sap.vocabularies.UI.v1.HeaderInfo#ActivityHeader"/>
+						</Record>
+					</Collection>
+				</Annotation>
+				<Annotation Term="com.sap.vocabularies.UI.v1.FieldGroup" Qualifier="Activity">
+					<Record>
+						<PropertyValue Property="Data">
+							<Collection>
+								<!--<Record Type="UI.DataField">
+								    <PropertyValue Property="Label" String="ID"/>
+									<PropertyValue Property="Value" Path="SupplierActivity"/>
+									<Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+								</Record>
+								<Record Type="UI.DataField">
+								    <PropertyValue Property="Label" String="Name"/>
+									<PropertyValue Property="Value" Path="SuplrActyName"/>
+									<Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+								</Record>
+								<Record Type="UI.DataField">
+								    <PropertyValue Property="Label" String="Type"/>
+									<PropertyValue Property="Value" Path="SuplrActyType"/>
+									<Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+								</Record>-->
+								<!--<Record Type="UI.DataField">
+								    <PropertyValue Property="Label" String="Employee Responsible"/>
+									<PropertyValue Property="Value" Path="EmployeeFullName"/>
+									<Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+								</Record-->
+								<!--<Record Type="UI.DataField">
+								    <PropertyValue Property="Label" String="Supplier ID"/>
+									<PropertyValue Property="Value" Path="Supplier"/>
+									<Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+								</Record>-->
+								<Record Type="UI.DataField">
+									<PropertyValue Property="Label" String="{@i18n&gt;Priority}"/>
+									<PropertyValue Property="Value" Path="SuplrActyPriorityName"/>
+									<Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+								</Record>
+								<Record Type="UI.DataField">
+									<PropertyValue Property="Label" String="{@i18n&gt;Status}"/>
+									<PropertyValue Property="Value" Path="SuplrActyLifecycleStatusName"/>
+									<Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+								</Record>
+								<Record Type="UI.DataField">
+									<PropertyValue Property="Label" String="{@i18n&gt;DueDate}"/>
+									<PropertyValue Property="Value" Path="DueDate"/>
+									<Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+								</Record>
+								<Record Type="UI.DataField">
+									<PropertyValue Property="Label" String="{@i18n&gt;PurchasingCategory}"/>
+									<PropertyValue Property="Value" Path="PurgCatDescription"/>
+									<Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+								</Record>
+								<Record Type="UI.DataField">
+									<PropertyValue Property="Label" String="{@i18n&gt;@SUPPLIER}"/>
+									<PropertyValue Property="Value" Path="SupplierName"/>
+									<Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+								</Record>
+								<Record Type="UI.DataField">
+									<PropertyValue Property="Label" String="{@i18n&gt;NumberOfTasks}"/>
+									<PropertyValue Property="Value" Path="TotalTaskCount"/>
+									<Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+								</Record>
+								<Record Type="UI.DataField">
+									<PropertyValue Property="Label" String="{@i18n&gt;Description}"/>
+									<PropertyValue Property="Value" Path="SuplrActyDescription"/>
+									<Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+								</Record>
+							</Collection>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+				<Annotation Term="com.sap.vocabularies.UI.v1.HeaderInfo">
+					<Record>
+						<PropertyValue Property="TypeName" String="{@i18n&gt;OpenActivity}"/>
+						<PropertyValue Property="TypeNamePlural" String="{@i18n&gt;OpenActivities}"/>
+						<PropertyValue Property="ImageUrl" String="/sap/bc/ui5_ui5/sap/prc_ovps1/img/activity1.jpg"/>
+						<PropertyValue Property="Title">
+							<Record Type="com.sap.vocabularies.UI.v1.DataField">
+								<PropertyValue Property="Value" Path="SuplrActyName"/>
+							</Record>
+						</PropertyValue>
+						<PropertyValue Property="Description">
+							<Record Type="UI.DataField">
+								<PropertyValue Property="Value" Path="SupplierActivity"/>
+							</Record>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+				<Annotation Term="UI.Identification">
+					<Collection>
+						<Record Type="com.sap.vocabularies.UI.v1.DataFieldForIntentBasedNavigation">
+							<PropertyValue Property="SemanticObject" String="SupplierActivity"/>
+							<PropertyValue Property="Action" String="manage"/>
+							<PropertyValue Property="Label" String="{@i18n&gt;ManageActivitys}"/>
+							<Annotation Term="com.sap.vocabularies.UI.v1.Importance" EnumMember="com.sap.vocabularies.UI.v1.ImportanceType/Medium"/>
+						</Record>
+						<Record Type="com.sap.vocabularies.UI.v1.DataFieldForIntentBasedNavigation">
+							<PropertyValue Property="SemanticObject" String="SupplierActivity"/>
+							<PropertyValue Property="Action" String="display"/>
+							<PropertyValue Property="Label" String="{@i18n&gt;ShowActivity}"/>
+							<Annotation Term="com.sap.vocabularies.UI.v1.Importance" EnumMember="com.sap.vocabularies.UI.v1.ImportanceType/Medium"/>
+						</Record>
+					</Collection>
+				</Annotation>
+			</Annotations>
+			<!-- End of Open Supplier Activities -->
+			<Annotations Target="MM_PRC_OVP.C_PurOrdValueWithPlndParameters"/>
+			<Annotations Target="MM_PRC_OVP.C_RFQMonitor_OvpResult">
+				<Annotation Term="UI.SelectionVariant" Qualifier="RFQparams">
+					<Record Type="UI.SelectionVariantType">
+						<PropertyValue Property="Parameters">
+							<Collection>
+								<Record Type="com.sap.vocabularies.UI.v1.Parameter">
+									<PropertyValue Property="PropertyName" PropertyPath="P_DisplayCurrency"/>
+									<PropertyValue Property="PropertyValue" String=""/>
+								</Record>
+							</Collection>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+				<Annotation Term="UI.DataPoint" Qualifier="_RFQMonitor_Status">
+					<Record>
+						<PropertyValue Property="Title" String="{@i18n&gt;@RFQ_STATUS}"/>
+						<PropertyValue Property="Value" Path="StatusName"/>
+					</Record>
+				</Annotation>
+				<Annotation Term="UI.LineItem" Qualifier="_RFQMonitor_LI">
+					<Collection>
+						<Record Type="UI.DataField">
+							<PropertyValue Property="Value" Path="RequestForQuotation"/>
+						</Record>
+						<Record Type="UI.DataField">
+							<PropertyValue Property="Value" Path="RequestForQuotationName"/>
+						</Record>
+						<Record Type="UI.DataField">
+							<PropertyValue Property="Value" Path="PurchasingDocumentTypeName"/>
+						</Record>
+						<Record Type="UI.DataFieldForAnnotation">
+							<PropertyValue Property="Label" String="{@i18n&gt;@RFQ_STATUS}"/>
+							<PropertyValue Property="Target" AnnotationPath="@UI.DataPoint#_RFQMonitor_Status"/>
+						</Record>
+						<Record Type="UI.DataFieldForAnnotation">
+							<PropertyValue Property="Label" String="{@i18n&gt;@LATEST_SUBMISSION_DATE}"/>
+							<PropertyValue Property="Target" AnnotationPath="@UI.DataPoint#_RFQMonitor_DP_LatestSubmissionDate"/>
+						</Record>
+						<Record Type="UI.DataFieldForAnnotation">
+							<PropertyValue Property="Label" String="{@i18n&gt;@TARGET_AMOUNT}"/>
+							<PropertyValue Property="Target" AnnotationPath="@UI.DataPoint#_RFQMonitor_DP_TargetAmount"/>
+						</Record>
+					</Collection>
+				</Annotation>
+				<Annotation Term="UI.DataPoint" Qualifier="_RFQMonitor_DP_LatestSubmissionDate">
+					<Record Type="UI.DataPointType">
+						<PropertyValue Property="Title" String="{@i18n&gt;@LATEST_SUBMISSION_DATE}"/>
+						<PropertyValue Property="Value" Path="OverdueDays"/>
+						<PropertyValue Property="CriticalityCalculation">
+							<Record Type="UI.CriticalityCalculationType">
+								<PropertyValue Property="ImprovementDirection" EnumMember="UI.ImprovementDirectionType/Minimize"/>
+								<PropertyValue Property="ToleranceRangeHighValue" String="0"/>
+								<PropertyValue Property="DeviationRangeHighValue" String="0"/>
+							</Record>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+				<Annotation Term="UI.DataPoint" Qualifier="_RFQMonitor_DP_TargetAmount">
+					<Record Type="UI.DataPointType">
+						<PropertyValue Property="Title" String="{@i18n&gt;@TARGET_AMOUNT}"/>
+						<PropertyValue Property="Value" Path="TargetAmount"/>
+						<PropertyValue Property="ValueFormat">
+							<Record Type="UI.NumberFormat">
+								<PropertyValue Property="ScaleFactor" Decimal="0"/>
+								<PropertyValue Property="NumberOfFractionalDigits" Int="0"/>
+							</Record>
+						</PropertyValue>
+						<PropertyValue Property="MinimumValue" Decimal="1"/>
+					</Record>
+				</Annotation>
+				<Annotation Term="UI.Identification" Qualifier="_RFQMonitor_to_RFQ">
+					<Collection>
+						<Record Type="UI.DataFieldForIntentBasedNavigation">
+							<PropertyValue Property="Criticality" String="UI.CriticalityType/Neutral"/>
+							<Annotation EnumMember="UI.ImportanceType/High" Term="UI.Importance"/>
+							<PropertyValue Property="SemanticObject" String="RequestForQuotation"/>
+							<PropertyValue Property="Action" String="manage"/>
+							<PropertyValue Property="Label" String="{@i18n&gt;@RFQ_MONITOR}"/>
+						</Record>
+					</Collection>
+				</Annotation>
+			</Annotations>
+			<Annotations Target="MM_PRC_OVP.C_PurReqnNoTouchResult">
+				<Annotation Term="UI.DataPoint" Qualifier="_SAP_MM_PRC_REQNNOTOUCHRATE_EVAL">
+					<Record Type="UI.DataPointType">
+						<!--<PropertyValue Property="Title" String="Overview Pages for Procurement"/>-->
+						<!--<PropertyValue Property="Value" Path="NoTouchRatio"/>-->
+						<!--<PropertyValue Property="CriticalityCalculation">-->
+						<!--	<Record>-->
+						<!--		<PropertyValue Property="ImprovementDirection" EnumMember="UI.ImprovementDirectionType/Maximize"/>-->
+						<!--	</Record>-->
+						<!--</PropertyValue>-->
+						<PropertyValue Property="ValueFormat">
+							<Record>
+								<PropertyValue Property="ScaleFactor" String=""/>
+								<PropertyValue Property="NumberOfFractionalDigits" Int="0"/>
+							</Record>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+			</Annotations>
+			<!--Monitor Purchase Order Items-->
+			<!--Begin of Tab 1: Overdue Tab-->
+			<Annotations Target="MM_PRC_OVP.C_MntrPurchaseOrderOvwPageResult">
+				<Annotation Term="UI.SelectionVariant" Qualifier="OverduePO_select">
+					<Record Type="UI.SelectionVariantType">
+						<PropertyValue Property="Parameters">
+							<Collection>
+								<Record Type="com.sap.vocabularies.UI.v1.Parameter">
+									<PropertyValue Property="PropertyName" PropertyPath="Parameters/P_DisplayCurrency"/>
+									<PropertyValue Property="PropertyValue" String="EUR"/>
+								</Record>
+							</Collection>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+				<Annotation Qualifier="OverduePO" Term="UI.PresentationVariant">
+					<Record>
+						<PropertyValue Property="ID" String=".OVERDUEPO"/>
+						<PropertyValue Property="SortOrder">
+							<Collection>
+								<Record Type="Common.SortOrderType">
+									<PropertyValue Property="Property" PropertyPath="DeliveryDate"/>
+									<PropertyValue Property="Descending" Bool="false"/>
+								</Record>
+								<Record Type="Common.SortOrderType">
+									<PropertyValue Property="Property" PropertyPath="StillToBeDeliveredValue"/>
+									<PropertyValue Property="Descending" Bool="true"/>
+								</Record>
+							</Collection>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+				<Annotation Qualifier="OverduePO_Supplier" Term="UI.LineItem">
+					<Collection>
+						<Record Type="UI.DataField">
+							<Annotation EnumMember="UI.ImportanceType/High" Term="UI.Importance"/>
+							<PropertyValue Property="Label" String="{@i18n&gt;@PO_DESCRIPTION}"/>
+							<PropertyValue Path="MaterialName" Property="Value"/>
+						</Record>
+						<Record Type="UI.DataField">
+							<Annotation EnumMember="UI.ImportanceType/High" Term="UI.Importance"/>
+							<PropertyValue Property="Value">
+								<Apply Function="odata.concat">
+									<Path>PurchaseOrder</Path>
+									<String>/</String>
+									<Path>PurchaseOrderItem</Path>
+								</Apply>
+							</PropertyValue>
+							<PropertyValue Property="Label" String="{@i18n&gt;@PO_ITEM}"/>
+						</Record>
+						<Record Type="UI.DataField">
+							<Annotation EnumMember="UI.ImportanceType/High" Term="UI.Importance"/>
+							<PropertyValue Property="Label" String="{@i18n&gt;@DELIVERY_DATE}"/>
+							<PropertyValue Property="Value" Path="DeliveryDate"/>
+						</Record>
+						<Record Type="UI.DataField">
+							<Annotation EnumMember="UI.ImportanceType/High" Term="UI.Importance"/>
+							<PropertyValue Property="Label" String="{@i18n&gt;@PO_ITEMVALUE}"/>
+							<PropertyValue Path="StillToBeDeliveredValue" Property="Value"/>
+						</Record>
+						<Record Type="UI.DataField">
+							<Annotation EnumMember="UI.ImportanceType/High" Term="UI.Importance"/>
+							<PropertyValue Path="SupplierName" Property="Value"/>
+							<PropertyValue Property="Label" String="{@i18n&gt;@SUPPLIER}"/>
+						</Record>
+						<Record Type="UI.DataField">
+							<Annotation EnumMember="UI.ImportanceType/High" Term="UI.Importance"/>
+							<PropertyValue Property="Label" String="{@i18n&gt;@PO_ITEMQTY}"/>
+							<PropertyValue Path="ScheduleLineOpenQty" Property="Value"/>
+						</Record>
+						<Record Type="UI.DataFieldForIntentBasedNavigation">
+							<PropertyValue Property="SemanticObject" String="PurchaseOrder"/>
+							<PropertyValue Property="Action" String="manage"/>
+							<PropertyValue Property="Label" String="Object Page"/>
+						</Record>
+					</Collection>
+				</Annotation>
+				<Annotation Qualifier="OverduePO_PurchaseOrder" Term="UI.Identification">
+					<Collection>
+						<Record Type="UI.DataFieldForIntentBasedNavigation">
+							<Annotation EnumMember="UI.ImportanceType/High" Term="UI.Importance"/>
+							<PropertyValue Property="SemanticObject" String="PurchaseOrderItem"/>
+							<PropertyValue Property="Action" String="monitorPurDocItems"/>
+							<PropertyValue Property="Label" String="Purchasing Order Item"/>
+						</Record>
+					</Collection>
+				</Annotation>
+			</Annotations>
+			<!--End of Tab 1: Overdue Tab-->
+			<!--Begin of Tab 2: In Approval Tab-->
+			<Annotations Target="MM_PRC_OVP.C_InApprovalPurchaseOrderItemResult">
+				<Annotation Term="UI.SelectionVariant" Qualifier="InApprovalPO_select">
+					<Record Type="UI.SelectionVariantType">
+						<PropertyValue Property="Parameters">
+							<Collection>
+								<Record Type="com.sap.vocabularies.UI.v1.Parameter">
+									<PropertyValue Property="PropertyName" PropertyPath="Parameters/P_DisplayCurrency"/>
+									<PropertyValue Property="PropertyValue" String="EUR"/>
+								</Record>
+							</Collection>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+				<Annotation Qualifier="InApprovalPO" Term="UI.PresentationVariant">
+					<Record>
+						<PropertyValue Property="ID" String=".OVERDUEPO"/>
+						<PropertyValue Property="SortOrder">
+							<Collection>
+								<Record Type="Common.SortOrderType">
+									<PropertyValue Property="Property" PropertyPath="PurchaseOrderDate"/>
+									<PropertyValue Property="Descending" Bool="false"/>
+								</Record>
+								<Record Type="Common.SortOrderType">
+									<PropertyValue Property="Property" PropertyPath="NetAmount"/>
+									<PropertyValue Property="Descending" Bool="true"/>
+								</Record>
+							</Collection>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+				<Annotation Qualifier="InApprovalPO_Supplier" Term="UI.LineItem">
+					<Collection>
+						<Record Type="UI.DataField">
+							<Annotation EnumMember="UI.ImportanceType/High" Term="UI.Importance"/>
+							<PropertyValue Property="Label" String="{@i18n&gt;@PO_DESCRIPTION}"/>
+							<PropertyValue Path="MaterialName" Property="Value"/>
+						</Record>
+						<Record Type="UI.DataField">
+							<Annotation EnumMember="UI.ImportanceType/High" Term="UI.Importance"/>
+							<PropertyValue Property="Value">
+								<Apply Function="odata.concat">
+									<Path>PurchaseOrder</Path>
+									<String>/</String>
+									<Path>PurchaseOrderItem</Path>
+								</Apply>
+							</PropertyValue>
+							<PropertyValue Property="Label" String="{@i18n&gt;@PO_ITEM}"/>
+						</Record>
+						<Record Type="UI.DataField">
+							<Annotation EnumMember="UI.ImportanceType/High" Term="UI.Importance"/>
+							<PropertyValue Property="Label" String="{@i18n&gt;@DELIVERY_DATE}"/>
+							<PropertyValue Property="Value" Path="PurchaseOrderDate"/>
+						</Record>
+						<Record Type="UI.DataField">
+							<Annotation EnumMember="UI.ImportanceType/High" Term="UI.Importance"/>
+							<PropertyValue Property="Label" String="{@i18n&gt;@PO_ITEMVALUE}"/>
+							<PropertyValue Path="NetAmount" Property="Value"/>
+						</Record>
+						<Record Type="UI.DataField">
+							<Annotation EnumMember="UI.ImportanceType/High" Term="UI.Importance"/>
+							<PropertyValue Path="SupplierName" Property="Value"/>
+							<PropertyValue Property="Label" String="{@i18n&gt;@SUPPLIER}"/>
+						</Record>
+						<Record Type="UI.DataField">
+							<Annotation EnumMember="UI.ImportanceType/High" Term="UI.Importance"/>
+							<PropertyValue Property="Label" String="{@i18n&gt;@PO_ITEMQTY}"/>
+							<PropertyValue Path="OrderQuantity" Property="Value"/>
+						</Record>
+						<Record Type="UI.DataFieldForIntentBasedNavigation">
+							<PropertyValue Property="SemanticObject" String="PurchaseOrder"/>
+							<PropertyValue Property="Action" String="manage"/>
+							<PropertyValue Property="Label" String="Object Page"/>
+						</Record>
+					</Collection>
+				</Annotation>
+				<Annotation Qualifier="InApprovalPO_PurchaseOrder" Term="UI.Identification">
+					<Collection>
+						<Record Type="UI.DataFieldForIntentBasedNavigation">
+							<Annotation EnumMember="UI.ImportanceType/High" Term="UI.Importance"/>
+							<PropertyValue Property="SemanticObject" String="PurchaseOrderItem"/>
+							<PropertyValue Property="Action" String="monitorPurDocItems"/>
+							<PropertyValue Property="Label" String="Purchasing Order Item"/>
+						</Record>
+					</Collection>
+				</Annotation>
+			</Annotations>
+			<!--End of Tab 2: In Approval Tab-->
+			<!--Puchase Order Items-->
+			<Annotations Target="MM_PRC_OVP.C_PurOrdDelivSchedDteType">
+				<Annotation Term="UI.Chart">
+					<Record Type="UI.ChartDefinitionType">
+						<PropertyValue Property="ChartType" EnumMember="UI.ChartType/Line"/>
+						<PropertyValue Property="MeasureAttributes">
+							<Collection>
+								<Record Type="UI.ChartMeasureAttributeType">
+									<PropertyValue Property="Measure" PropertyPath="NumberOfPurchaseOrderItems"/>
+									<PropertyValue Property="Role" EnumMember="UI.ChartMeasureRoleType/Axis1"/>
+								</Record>
+							</Collection>
+						</PropertyValue>
+						<PropertyValue Property="Measures">
+							<Collection>
+								<PropertyPath>NumberOfPurchaseOrderItems</PropertyPath>
+							</Collection>
+						</PropertyValue>
+						<PropertyValue Property="DimensionAttributes">
+							<Collection>
+								<Record Type="UI.ChartDimensionAttributeType">
+									<PropertyValue Property="Role" EnumMember="UI.ChartDimensionRoleType/Category"/>
+									<PropertyValue Property="Dimension" PropertyPath="SchedDelivDteNextStsInDaysTxt"/>
+								</Record>
+							</Collection>
+						</PropertyValue>
+						<PropertyValue Property="Dimensions">
+							<Collection>
+								<PropertyPath>SchedDelivDteNextStsInDaysTxt</PropertyPath>
+							</Collection>
+						</PropertyValue>
+						<PropertyValue Property="Actions">
+							<Collection/>
+						</PropertyValue>
+						<PropertyValue Property="Title" String="{@i18n&gt;ui.s2p.mm.ovps1_card14_subTitle}"/>
+					</Record>
+				</Annotation>
+				<Annotation Term="UI.PresentationVariant">
+					<Record Type="UI.PresentationVariantType">
+						<PropertyValue Property="SortOrder">
+							<Collection>
+								<Record Type="Common.SortOrderType">
+									<PropertyValue Property="Property" PropertyPath="SchedDelivDteNextStsInDays"/>
+									<PropertyValue Property="Descending" Bool="false"/>
+								</Record>
+							</Collection>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+				<Annotation Term="UI.Identification">
+					<Collection>
+						<Record Type="UI.DataFieldForIntentBasedNavigation">
+							<PropertyValue Property="SemanticObject" String="PurchaseOrderItem"/>
+							<PropertyValue Property="Action" String="monitorPurDocItems"/>
+						</Record>
+					</Collection>
+				</Annotation>
+			</Annotations>
+			<!--Monitor Supplier Confirmations Annotations -->
+			<Annotations Target="MM_PRC_OVP.C_MonitorSupplierConfirmationResult">
+				<Annotation Term="UI.LineItem" Qualifier="ByMissConf">
+					<Collection>
+						<Record Type="UI.DataField">
+							<PropertyValue Property="Value" Path="PurchasingDocumentItemText"/>
+							<PropertyValue Property="Label" String="{@i18n&gt;Description}"/>
+							<Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+						</Record>
+						<Record Type="UI.DataField">
+							<PropertyValue Property="Value" Path="FormattedPurchasingDocItem"/>
+							<PropertyValue Property="Label" String="{@i18n&gt;@PO_ITEM}"/>
+							<Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+						</Record>
+						<Record Type="UI.DataField">
+							<PropertyValue Property="Value" Path="ScheduleLineDeliveryDate"/>
+							<PropertyValue Property="Label" String="{@i18n&gt;@REQUESTED_DELIVERY_DATE}"/>
+							<Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+						</Record>
+						<Record Type="UI.DataField">
+							<PropertyValue Property="Value" Path="ItemPrice"/>
+							<PropertyValue Property="Label" String="{@i18n&gt;@ITEM_PRICE}"/>
+							<Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+						</Record>
+						<Record Type="UI.DataField">
+							<PropertyValue Property="Value" Path="SupplierName"/>
+							<PropertyValue Property="Label" String="{@i18n&gt;@SUPPLIER}"/>
+							<Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+						</Record>
+						<Record Type="UI.DataFieldForIntentBasedNavigation">
+							<PropertyValue Property="SemanticObject" String="PurchaseOrderItem"/>
+							<PropertyValue Property="Action" String="monitorSupplierConfirmations"/>
+						</Record>
+					</Collection>
+				</Annotation>
+				<Annotation Term="UI.LineItem" Qualifier="ByTimeVar">
+					<Collection>
+						<Record Type="UI.DataField">
+							<PropertyValue Property="Value" Path="PurchasingDocumentItemText"/>
+							<PropertyValue Property="Label" String="{@i18n&gt;Description}"/>
+							<Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+						</Record>
+						<Record Type="UI.DataField">
+							<PropertyValue Property="Value" Path="FormattedPurchasingDocItem"/>
+							<PropertyValue Property="Label" String="{@i18n&gt;@PO_ITEM}"/>
+							<Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+						</Record>
+						<Record Type="UI.DataField">
+							<PropertyValue Property="Value">
+								<Apply Function="odata.concat">
+									<Path>TimeVarianceInDays</Path>
+									<Path>UnitOfMeasureName</Path>
+								</Apply>
+							</PropertyValue>
+							<PropertyValue Property="Label" String="{@i18n&gt;@TIME_VARIANCE}"/>
+							<Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+						</Record>
+						<Record Type="UI.DataField">
+							<PropertyValue Property="Value" Path="ItemPrice"/>
+							<PropertyValue Property="Label" String="{@i18n&gt;@ITEM_PRICE}"/>
+							<Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+						</Record>
+						<Record Type="UI.DataField">
+							<PropertyValue Property="Value" Path="SupplierName"/>
+							<PropertyValue Property="Label" String="{@i18n&gt;@SUPPLIER}"/>
+							<Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+						</Record>
+						<Record Type="UI.DataField">
+							<PropertyValue Property="Value" Path="ScheduleLineDeliveryDate"/>
+							<PropertyValue Property="Label" String="{@i18n&gt;@REQUESTED_DELIVERY_DATE}"/>
+							<Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+						</Record>
+						<Record Type="UI.DataFieldForIntentBasedNavigation">
+							<PropertyValue Property="SemanticObject" String="PurchaseOrderItem"/>
+							<PropertyValue Property="Action" String="monitorSupplierConfirmations"/>
+						</Record>
+					</Collection>
+				</Annotation>
+				<Annotation Term="UI.LineItem" Qualifier="ByQuantVar">
+					<Collection>
+						<Record Type="UI.DataField">
+							<PropertyValue Property="Value" Path="PurchasingDocumentItemText"/>
+							<PropertyValue Property="Label" String="{@i18n&gt;Description}"/>
+							<Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+						</Record>
+						<Record Type="UI.DataFieldForAnnotation">
+							<PropertyValue Property="Target" AnnotationPath="@UI.DataPoint#QuantityVarianceInPct"/>
+							<PropertyValue Property="Label" String="{@i18n&gt;@QUANTITY_VARIANCE}"/>
+							<Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+						</Record>
+						<Record Type="UI.DataField">
+							<PropertyValue Property="Value" Path="FormattedPurchasingDocItem"/>
+							<PropertyValue Property="Label" String="{@i18n&gt;@PO_ITEM}"/>
+							<Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+						</Record>
+						<Record Type="UI.DataField">
+							<PropertyValue Property="Value" Path="ItemPrice"/>
+							<PropertyValue Property="Label" String="{@i18n&gt;@REQUESTED_VALUE}"/>
+							<Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+						</Record>
+						<Record Type="UI.DataField">
+							<PropertyValue Property="Value" Path="SupplierName"/>
+							<PropertyValue Property="Label" String="{@i18n&gt;@SUPPLIER}"/>
+							<Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+						</Record>
+						<Record Type="UI.DataField">
+							<PropertyValue Property="Value" Path="OrderedQuantity"/>
+							<PropertyValue Property="Label" String="{@i18n&gt;@REQUESTED_QUANTITY}"/>
+							<Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+						</Record>
+						<Record Type="UI.DataField">
+							<PropertyValue Property="Value" Path="ScheduleLineDeliveryDate"/>
+							<PropertyValue Property="Label" String="{@i18n&gt;@REQUESTED_DELIVERY_DATE}"/>
+							<Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+						</Record>
+						<Record Type="UI.DataFieldForIntentBasedNavigation">
+							<PropertyValue Property="SemanticObject" String="PurchaseOrderItem"/>
+							<PropertyValue Property="Action" String="monitorSupplierConfirmations"/>
+						</Record>
+					</Collection>
+				</Annotation>
+				<Annotation Term="UI.PresentationVariant" Qualifier="MoniSupConf">
+					<Record>
+						<PropertyValue Property="ID" String=".MSC"/>
+						<PropertyValue Property="SortOrder">
+							<Collection>
+								<Record Type="Common.SortOrderType">
+									<PropertyValue Property="Property" PropertyPath="ScheduleLineDeliveryDate"/>
+									<PropertyValue Property="Descending" Bool="false"/>
+								</Record>
+								<Record Type="Common.SortOrderType">
+									<PropertyValue Property="Property" PropertyPath="ItemPrice"/>
+									<PropertyValue Property="Descending" Bool="true"/>
+								</Record>
+							</Collection>
+						</PropertyValue>
+						<PropertyValue Property="RequestAtLeast">
+							<Collection>
+								<PropertyPath>PurchasingDocument</PropertyPath>
+								<PropertyPath>PurchasingDocumentItem</PropertyPath>
+								<PropertyPath>ScheduleLine</PropertyPath>
+								<PropertyPath>SupplierConfirmationCategory</PropertyPath>
+							</Collection>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+				<Annotation Term="UI.DataPoint" Qualifier="QuantityVarianceInPct">
+					<Record>
+						<PropertyValue Property="Title" String="{@i18n&gt;@QUANTITY_VARIANCE}"/>
+						<PropertyValue Property="ValueFormat">
+							<Record>
+								<PropertyValue Int="2" Property="NumberOfFractionalDigits"/>
+							</Record>
+						</PropertyValue>
+						<PropertyValue Property="Value">
+							<Apply Function="odata.concat">
+								<Path>QuantityVarianceInPct</Path>
+								<String>
+									<![CDATA[ %]]>
+								</String>
+							</Apply>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+				<Annotation Term="UI.Identification" Qualifier="MSC">
+					<Collection>
+						<Record Type="UI.DataFieldForIntentBasedNavigation">
+							<PropertyValue Property="SemanticObject" String="PurchaseOrderItem"/>
+							<PropertyValue Property="Action" String="monitorSupplierConfirmations"/>
+						</Record>
+					</Collection>
+				</Annotation>
+				<Annotation Term="UI.SelectionVariant" Qualifier="ByQuantVar">
+					<Record Type="UI.SelectionVariantType">
+						<PropertyValue Property="Parameters">
+							<Collection>
+								<Record Type="UI.Parameter">
+									<PropertyValue Property="PropertyName" PropertyPath="Parameters/P_DisplayCurrency"/>
+									<PropertyValue Property="PropertyValue" String="EUR"/>
+								</Record>
+							</Collection>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+				<Annotation Term="UI.SelectionVariant" Qualifier="ByTimeVar">
+					<Record Type="UI.SelectionVariantType">
+						<PropertyValue Property="SelectOptions">
+							<Collection>
+								<Record Type="UI.SelectOptionType">
+									<PropertyValue Property="PropertyName" PropertyPath="VarianceCalcDataIsRecorded"/>
+									<PropertyValue Property="Ranges">
+										<Collection>
+											<Record Type="UI.SelectionRangeType">
+												<PropertyValue Property="Sign" EnumMember="UI.SelectionRangeSignType/I"/>
+												<PropertyValue Property="Option" EnumMember="UI.SelectionRangeOptionType/EQ"/>
+												<PropertyValue Property="Low" String="01"/>
+											</Record>
+										</Collection>
+									</PropertyValue>
+								</Record>
+							</Collection>
+						</PropertyValue>
+						<PropertyValue Property="Parameters">
+							<Collection>
+								<Record Type="UI.Parameter">
+									<PropertyValue Property="PropertyName" PropertyPath="Parameters/P_DisplayCurrency"/>
+									<PropertyValue Property="PropertyValue" String="EUR"/>
+								</Record>
+							</Collection>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+			</Annotations>
+			<Annotations Target="MM_PRC_OVP.C_MonitorSupplierConfirmationParameters/P_DisplayCurrency">
+				<Annotation Term="com.sap.vocabularies.Common.v1.ValueList">
+					<Record>
+						<PropertyValue Property="Label" String="Currency"/>
+						<PropertyValue Property="CollectionPath" String="I_Currency"/>
+						<PropertyValue Property="SearchSupported" Bool="true"/>
+						<PropertyValue Property="Parameters">
+							<Collection>
+								<Record Type="com.sap.vocabularies.Common.v1.ValueListParameterInOut">
+									<PropertyValue Property="ValueListProperty" String="Currency"/>
+									<PropertyValue Property="LocalDataProperty" PropertyPath="P_DisplayCurrency"/>
+								</Record>
+								<Record Type="com.sap.vocabularies.Common.v1.ValueListParameterDisplayOnly">
+									<PropertyValue Property="ValueListProperty" String="Currency_Text"/>
+								</Record>
+								<Record Type="com.sap.vocabularies.Common.v1.ValueListParameterDisplayOnly">
+									<PropertyValue Property="ValueListProperty" String="Decimals"/>
+								</Record>
+								<Record Type="com.sap.vocabularies.Common.v1.ValueListParameterDisplayOnly">
+									<PropertyValue Property="ValueListProperty" String="CurrencyISOCode"/>
+								</Record>
+								<Record Type="com.sap.vocabularies.Common.v1.ValueListParameterDisplayOnly">
+									<PropertyValue Property="ValueListProperty" String="AlternativeCurrencyKey"/>
+								</Record>
+								<Record Type="com.sap.vocabularies.Common.v1.ValueListParameterDisplayOnly">
+									<PropertyValue Property="ValueListProperty" String="IsPrimaryCurrencyForISOCrcy"/>
+								</Record>
+							</Collection>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+			</Annotations>
+		</Schema>
+	</edmx:DataServices>
+</edmx:Edmx>

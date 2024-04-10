@@ -1,0 +1,44 @@
+<!--
+
+    Copyright (C) 2009-2021 SAP SE or an SAP affiliate company. All rights reserved.
+
+-->
+<edmx:Edmx xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx" Version="4.0">
+	<edmx:Reference Uri="/sap/bc/ui5_ui5/ui2/ushell/resources/sap/ushell/components/factsheet/vocabularies/UI.xml">
+		<edmx:Include Alias="UI" Namespace="com.sap.vocabularies.UI.v1"/>
+	</edmx:Reference>
+	<edmx:Reference Uri="/sap/bc/ui5_ui5/ui2/ushell/resources/sap/ushell/components/factsheet/vocabularies/Communication.xml">
+		<edmx:Include Alias="vCard" Namespace="com.sap.vocabularies.Communication.v1"/>
+	</edmx:Reference>
+	<edmx:Reference Uri="http://docs.oasis-open.org/odata/odata/v4.0/cs01/vocabularies/Org.OData.Measures.V1.xml">
+		<edmx:Include Alias="CQP" Namespace="Org.OData.Measures.V1"/>
+	</edmx:Reference>
+	<edmx:Reference Uri="/sap/bc/ui5_ui5/ui2/ushell/resources/sap/ushell/components/factsheet/vocabularies/Common.xml">
+		<edmx:Include Alias="Common" Namespace="com.sap.vocabularies.Common.v1"/>
+	</edmx:Reference>
+	<edmx:Reference Uri="/sap/opu/odata/sap/C_REQUISITIONNOTOUCHRATE_CDS/$metadata">
+		<edmx:Include Alias="C_REQUISITIONNOTOUCHRATE_CDS" Namespace="C_REQUISITIONNOTOUCHRATE_CDS"/>
+	</edmx:Reference>
+	<edmx:DataServices>
+		<Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Alias="C_REQUISITIONNOTOUCHRATE_CDSAnnotation"
+			Namespace="sap.cbesh.cestbon.C_REQUISITIONNOTOUCHRATE_CDSAnnotation">
+			<Annotation Term="UI.DataPoint" Qualifier="_SAP_MM_PRC_REQNNOTOUCHRATE_EVALM">
+				<Record Type="UI.DataPointType">
+					<!--<PropertyValue Property="Title" String="Overview Pages for Procurement"/>-->
+					<!--<PropertyValue Property="Value" Path="NoTouchRatio"/>-->
+					<PropertyValue Property="ValueFormat">
+						<Record>
+							<PropertyValue Property="ScaleFactor" String=""/>
+							<PropertyValue Property="NumberOfFractionalDigits" Int="0"/>
+						</Record>
+					</PropertyValue>
+					<!--<PropertyValue Property="CriticalityCalculation">-->
+					<!--	<Record>-->
+					<!--		<PropertyValue Property="ImprovementDirection" EnumMember="UI.ImprovementDirectionType/Maximize"/>-->
+					<!--	</Record>-->
+					<!--</PropertyValue>-->
+				</Record>
+			</Annotation>
+		</Schema>
+	</edmx:DataServices>
+</edmx:Edmx>

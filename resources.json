@@ -1,0 +1,568 @@
+{
+	"_version": "1.1.0",
+	"resources": [
+		{
+			"name": "Component-dbg.js",
+			"module": "ui/s2p/mm/ovps1/Component.js",
+			"size": 561,
+			"isDebug": true,
+			"required": [
+				"sap/ovp/app/Component.js"
+			]
+		},
+		{
+			"name": "Component-h2-preload-dbg.js",
+			"module": "ui/s2p/mm/ovps1/Component-h2-preload.js",
+			"size": 19041,
+			"isDebug": true,
+			"merged": true,
+			"required": [
+				"sap/m/MessageToast.js",
+				"sap/ovp/app/Component.js",
+				"sap/ui/model/Filter.js"
+			],
+			"included": [
+				"ui/s2p/mm/ovps1/Component.js",
+				"ui/s2p/mm/ovps1/manifest.json",
+				"ui/s2p/mm/ovps1/ext/custom.controller.js",
+				"ui/s2p/mm/ovps1/i18n/i18n.properties",
+				"ui/s2p/mm/ovps1/i18n/i18n_ar.properties",
+				"ui/s2p/mm/ovps1/i18n/i18n_bg.properties",
+				"ui/s2p/mm/ovps1/i18n/i18n_ca.properties",
+				"ui/s2p/mm/ovps1/i18n/i18n_cs.properties",
+				"ui/s2p/mm/ovps1/i18n/i18n_da.properties",
+				"ui/s2p/mm/ovps1/i18n/i18n_de.properties",
+				"ui/s2p/mm/ovps1/i18n/i18n_el.properties",
+				"ui/s2p/mm/ovps1/i18n/i18n_en.properties",
+				"ui/s2p/mm/ovps1/i18n/i18n_en_US_sappsd.properties",
+				"ui/s2p/mm/ovps1/i18n/i18n_en_US_saptrc.properties",
+				"ui/s2p/mm/ovps1/i18n/i18n_es.properties",
+				"ui/s2p/mm/ovps1/i18n/i18n_et.properties",
+				"ui/s2p/mm/ovps1/i18n/i18n_fi.properties",
+				"ui/s2p/mm/ovps1/i18n/i18n_fr.properties",
+				"ui/s2p/mm/ovps1/i18n/i18n_hi.properties",
+				"ui/s2p/mm/ovps1/i18n/i18n_hr.properties",
+				"ui/s2p/mm/ovps1/i18n/i18n_hu.properties",
+				"ui/s2p/mm/ovps1/i18n/i18n_it.properties",
+				"ui/s2p/mm/ovps1/i18n/i18n_iw.properties",
+				"ui/s2p/mm/ovps1/i18n/i18n_ja.properties",
+				"ui/s2p/mm/ovps1/i18n/i18n_kk.properties",
+				"ui/s2p/mm/ovps1/i18n/i18n_ko.properties",
+				"ui/s2p/mm/ovps1/i18n/i18n_lt.properties",
+				"ui/s2p/mm/ovps1/i18n/i18n_lv.properties",
+				"ui/s2p/mm/ovps1/i18n/i18n_ms.properties",
+				"ui/s2p/mm/ovps1/i18n/i18n_nl.properties",
+				"ui/s2p/mm/ovps1/i18n/i18n_no.properties",
+				"ui/s2p/mm/ovps1/i18n/i18n_pl.properties",
+				"ui/s2p/mm/ovps1/i18n/i18n_pt.properties",
+				"ui/s2p/mm/ovps1/i18n/i18n_ro.properties",
+				"ui/s2p/mm/ovps1/i18n/i18n_ru.properties",
+				"ui/s2p/mm/ovps1/i18n/i18n_sh.properties",
+				"ui/s2p/mm/ovps1/i18n/i18n_sk.properties",
+				"ui/s2p/mm/ovps1/i18n/i18n_sl.properties",
+				"ui/s2p/mm/ovps1/i18n/i18n_sv.properties",
+				"ui/s2p/mm/ovps1/i18n/i18n_th.properties",
+				"ui/s2p/mm/ovps1/i18n/i18n_tr.properties",
+				"ui/s2p/mm/ovps1/i18n/i18n_uk.properties",
+				"ui/s2p/mm/ovps1/i18n/i18n_vi.properties",
+				"ui/s2p/mm/ovps1/i18n/i18n_zh_CN.properties",
+				"ui/s2p/mm/ovps1/i18n/i18n_zh_TW.properties"
+			]
+		},
+		{
+			"name": "Component-h2-preload.js",
+			"module": "ui/s2p/mm/ovps1/Component-h2-preload.js",
+			"size": 18977,
+			"merged": true,
+			"required": [
+				"sap/m/MessageToast.js",
+				"sap/ovp/app/Component.js",
+				"sap/ui/model/Filter.js"
+			],
+			"included": [
+				"ui/s2p/mm/ovps1/Component.js",
+				"ui/s2p/mm/ovps1/manifest.json",
+				"ui/s2p/mm/ovps1/ext/custom.controller.js",
+				"ui/s2p/mm/ovps1/i18n/i18n.properties",
+				"ui/s2p/mm/ovps1/i18n/i18n_ar.properties",
+				"ui/s2p/mm/ovps1/i18n/i18n_bg.properties",
+				"ui/s2p/mm/ovps1/i18n/i18n_ca.properties",
+				"ui/s2p/mm/ovps1/i18n/i18n_cs.properties",
+				"ui/s2p/mm/ovps1/i18n/i18n_da.properties",
+				"ui/s2p/mm/ovps1/i18n/i18n_de.properties",
+				"ui/s2p/mm/ovps1/i18n/i18n_el.properties",
+				"ui/s2p/mm/ovps1/i18n/i18n_en.properties",
+				"ui/s2p/mm/ovps1/i18n/i18n_en_US_sappsd.properties",
+				"ui/s2p/mm/ovps1/i18n/i18n_en_US_saptrc.properties",
+				"ui/s2p/mm/ovps1/i18n/i18n_es.properties",
+				"ui/s2p/mm/ovps1/i18n/i18n_et.properties",
+				"ui/s2p/mm/ovps1/i18n/i18n_fi.properties",
+				"ui/s2p/mm/ovps1/i18n/i18n_fr.properties",
+				"ui/s2p/mm/ovps1/i18n/i18n_hi.properties",
+				"ui/s2p/mm/ovps1/i18n/i18n_hr.properties",
+				"ui/s2p/mm/ovps1/i18n/i18n_hu.properties",
+				"ui/s2p/mm/ovps1/i18n/i18n_it.properties",
+				"ui/s2p/mm/ovps1/i18n/i18n_iw.properties",
+				"ui/s2p/mm/ovps1/i18n/i18n_ja.properties",
+				"ui/s2p/mm/ovps1/i18n/i18n_kk.properties",
+				"ui/s2p/mm/ovps1/i18n/i18n_ko.properties",
+				"ui/s2p/mm/ovps1/i18n/i18n_lt.properties",
+				"ui/s2p/mm/ovps1/i18n/i18n_lv.properties",
+				"ui/s2p/mm/ovps1/i18n/i18n_ms.properties",
+				"ui/s2p/mm/ovps1/i18n/i18n_nl.properties",
+				"ui/s2p/mm/ovps1/i18n/i18n_no.properties",
+				"ui/s2p/mm/ovps1/i18n/i18n_pl.properties",
+				"ui/s2p/mm/ovps1/i18n/i18n_pt.properties",
+				"ui/s2p/mm/ovps1/i18n/i18n_ro.properties",
+				"ui/s2p/mm/ovps1/i18n/i18n_ru.properties",
+				"ui/s2p/mm/ovps1/i18n/i18n_sh.properties",
+				"ui/s2p/mm/ovps1/i18n/i18n_sk.properties",
+				"ui/s2p/mm/ovps1/i18n/i18n_sl.properties",
+				"ui/s2p/mm/ovps1/i18n/i18n_sv.properties",
+				"ui/s2p/mm/ovps1/i18n/i18n_th.properties",
+				"ui/s2p/mm/ovps1/i18n/i18n_tr.properties",
+				"ui/s2p/mm/ovps1/i18n/i18n_uk.properties",
+				"ui/s2p/mm/ovps1/i18n/i18n_vi.properties",
+				"ui/s2p/mm/ovps1/i18n/i18n_zh_CN.properties",
+				"ui/s2p/mm/ovps1/i18n/i18n_zh_TW.properties"
+			]
+		},
+		{
+			"name": "Component-preload.js",
+			"module": "ui/s2p/mm/ovps1/Component-preload.js",
+			"size": 298155,
+			"merged": true,
+			"required": [
+				"sap/m/MessageToast.js",
+				"sap/ovp/app/Component.js",
+				"sap/ui/model/Filter.js"
+			],
+			"included": [
+				"ui/s2p/mm/ovps1/Component.js",
+				"ui/s2p/mm/ovps1/ext/custom.controller.js",
+				"ui/s2p/mm/ovps1/i18n/i18n.properties",
+				"ui/s2p/mm/ovps1/i18n/i18n_ar.properties",
+				"ui/s2p/mm/ovps1/i18n/i18n_bg.properties",
+				"ui/s2p/mm/ovps1/i18n/i18n_ca.properties",
+				"ui/s2p/mm/ovps1/i18n/i18n_cs.properties",
+				"ui/s2p/mm/ovps1/i18n/i18n_da.properties",
+				"ui/s2p/mm/ovps1/i18n/i18n_de.properties",
+				"ui/s2p/mm/ovps1/i18n/i18n_el.properties",
+				"ui/s2p/mm/ovps1/i18n/i18n_en.properties",
+				"ui/s2p/mm/ovps1/i18n/i18n_en_US_sappsd.properties",
+				"ui/s2p/mm/ovps1/i18n/i18n_en_US_saptrc.properties",
+				"ui/s2p/mm/ovps1/i18n/i18n_es.properties",
+				"ui/s2p/mm/ovps1/i18n/i18n_et.properties",
+				"ui/s2p/mm/ovps1/i18n/i18n_fi.properties",
+				"ui/s2p/mm/ovps1/i18n/i18n_fr.properties",
+				"ui/s2p/mm/ovps1/i18n/i18n_hi.properties",
+				"ui/s2p/mm/ovps1/i18n/i18n_hr.properties",
+				"ui/s2p/mm/ovps1/i18n/i18n_hu.properties",
+				"ui/s2p/mm/ovps1/i18n/i18n_it.properties",
+				"ui/s2p/mm/ovps1/i18n/i18n_iw.properties",
+				"ui/s2p/mm/ovps1/i18n/i18n_ja.properties",
+				"ui/s2p/mm/ovps1/i18n/i18n_kk.properties",
+				"ui/s2p/mm/ovps1/i18n/i18n_ko.properties",
+				"ui/s2p/mm/ovps1/i18n/i18n_lt.properties",
+				"ui/s2p/mm/ovps1/i18n/i18n_lv.properties",
+				"ui/s2p/mm/ovps1/i18n/i18n_ms.properties",
+				"ui/s2p/mm/ovps1/i18n/i18n_nl.properties",
+				"ui/s2p/mm/ovps1/i18n/i18n_no.properties",
+				"ui/s2p/mm/ovps1/i18n/i18n_pl.properties",
+				"ui/s2p/mm/ovps1/i18n/i18n_pt.properties",
+				"ui/s2p/mm/ovps1/i18n/i18n_ro.properties",
+				"ui/s2p/mm/ovps1/i18n/i18n_ru.properties",
+				"ui/s2p/mm/ovps1/i18n/i18n_sh.properties",
+				"ui/s2p/mm/ovps1/i18n/i18n_sk.properties",
+				"ui/s2p/mm/ovps1/i18n/i18n_sl.properties",
+				"ui/s2p/mm/ovps1/i18n/i18n_sv.properties",
+				"ui/s2p/mm/ovps1/i18n/i18n_th.properties",
+				"ui/s2p/mm/ovps1/i18n/i18n_tr.properties",
+				"ui/s2p/mm/ovps1/i18n/i18n_uk.properties",
+				"ui/s2p/mm/ovps1/i18n/i18n_vi.properties",
+				"ui/s2p/mm/ovps1/i18n/i18n_zh_CN.properties",
+				"ui/s2p/mm/ovps1/i18n/i18n_zh_TW.properties",
+				"ui/s2p/mm/ovps1/manifest.json"
+			]
+		},
+		{
+			"name": "Component.js",
+			"module": "ui/s2p/mm/ovps1/Component.js",
+			"size": 301,
+			"required": [
+				"sap/ovp/app/Component.js"
+			]
+		},
+		{
+			"name": "ext/custom-dbg.controller.js",
+			"module": "ui/s2p/mm/ovps1/ext/custom.controller.js",
+			"size": 3953,
+			"isDebug": true,
+			"required": [
+				"sap/m/MessageToast.js",
+				"sap/ui/model/Filter.js"
+			]
+		},
+		{
+			"name": "ext/custom.controller.js",
+			"module": "ui/s2p/mm/ovps1/ext/custom.controller.js",
+			"size": 1259,
+			"required": [
+				"sap/m/MessageToast.js",
+				"sap/ui/model/Filter.js"
+			]
+		},
+		{
+			"name": "i18n/i18n.properties",
+			"module": "ui/s2p/mm/ovps1/i18n/i18n.properties",
+			"size": 4615,
+			"locale": "",
+			"raw": "i18n/i18n.properties"
+		},
+		{
+			"name": "i18n/i18n_ar.properties",
+			"module": "ui/s2p/mm/ovps1/i18n/i18n_ar.properties",
+			"size": 11381,
+			"locale": "ar",
+			"raw": "i18n/i18n.properties"
+		},
+		{
+			"name": "i18n/i18n_bg.properties",
+			"module": "ui/s2p/mm/ovps1/i18n/i18n_bg.properties",
+			"size": 13506,
+			"locale": "bg",
+			"raw": "i18n/i18n.properties"
+		},
+		{
+			"name": "i18n/i18n_ca.properties",
+			"module": "ui/s2p/mm/ovps1/i18n/i18n_ca.properties",
+			"size": 5218,
+			"locale": "ca",
+			"raw": "i18n/i18n.properties"
+		},
+		{
+			"name": "i18n/i18n_cs.properties",
+			"module": "ui/s2p/mm/ovps1/i18n/i18n_cs.properties",
+			"size": 5583,
+			"locale": "cs",
+			"raw": "i18n/i18n.properties"
+		},
+		{
+			"name": "i18n/i18n_da.properties",
+			"module": "ui/s2p/mm/ovps1/i18n/i18n_da.properties",
+			"size": 4921,
+			"locale": "da",
+			"raw": "i18n/i18n.properties"
+		},
+		{
+			"name": "i18n/i18n_de.properties",
+			"module": "ui/s2p/mm/ovps1/i18n/i18n_de.properties",
+			"size": 4893,
+			"locale": "de",
+			"raw": "i18n/i18n.properties"
+		},
+		{
+			"name": "i18n/i18n_el.properties",
+			"module": "ui/s2p/mm/ovps1/i18n/i18n_el.properties",
+			"size": 12972,
+			"locale": "el",
+			"raw": "i18n/i18n.properties"
+		},
+		{
+			"name": "i18n/i18n_en.properties",
+			"module": "ui/s2p/mm/ovps1/i18n/i18n_en.properties",
+			"size": 4483,
+			"locale": "en",
+			"raw": "i18n/i18n.properties"
+		},
+		{
+			"name": "i18n/i18n_en_US_sappsd.properties",
+			"module": "ui/s2p/mm/ovps1/i18n/i18n_en_US_sappsd.properties",
+			"size": 15894,
+			"locale": "en_US_sappsd",
+			"raw": "i18n/i18n.properties"
+		},
+		{
+			"name": "i18n/i18n_en_US_saptrc.properties",
+			"module": "ui/s2p/mm/ovps1/i18n/i18n_en_US_saptrc.properties",
+			"size": 6612,
+			"locale": "en_US_saptrc",
+			"raw": "i18n/i18n.properties"
+		},
+		{
+			"name": "i18n/i18n_es.properties",
+			"module": "ui/s2p/mm/ovps1/i18n/i18n_es.properties",
+			"size": 4924,
+			"locale": "es",
+			"raw": "i18n/i18n.properties"
+		},
+		{
+			"name": "i18n/i18n_et.properties",
+			"module": "ui/s2p/mm/ovps1/i18n/i18n_et.properties",
+			"size": 4540,
+			"locale": "et",
+			"raw": "i18n/i18n.properties"
+		},
+		{
+			"name": "i18n/i18n_fi.properties",
+			"module": "ui/s2p/mm/ovps1/i18n/i18n_fi.properties",
+			"size": 5394,
+			"locale": "fi",
+			"raw": "i18n/i18n.properties"
+		},
+		{
+			"name": "i18n/i18n_fr.properties",
+			"module": "ui/s2p/mm/ovps1/i18n/i18n_fr.properties",
+			"size": 5042,
+			"locale": "fr",
+			"raw": "i18n/i18n.properties"
+		},
+		{
+			"name": "i18n/i18n_hi.properties",
+			"module": "ui/s2p/mm/ovps1/i18n/i18n_hi.properties",
+			"size": 11230,
+			"locale": "hi",
+			"raw": "i18n/i18n.properties"
+		},
+		{
+			"name": "i18n/i18n_hr.properties",
+			"module": "ui/s2p/mm/ovps1/i18n/i18n_hr.properties",
+			"size": 4761,
+			"locale": "hr",
+			"raw": "i18n/i18n.properties"
+		},
+		{
+			"name": "i18n/i18n_hu.properties",
+			"module": "ui/s2p/mm/ovps1/i18n/i18n_hu.properties",
+			"size": 6328,
+			"locale": "hu",
+			"raw": "i18n/i18n.properties"
+		},
+		{
+			"name": "i18n/i18n_it.properties",
+			"module": "ui/s2p/mm/ovps1/i18n/i18n_it.properties",
+			"size": 4994,
+			"locale": "it",
+			"raw": "i18n/i18n.properties"
+		},
+		{
+			"name": "i18n/i18n_iw.properties",
+			"module": "ui/s2p/mm/ovps1/i18n/i18n_iw.properties",
+			"size": 9922,
+			"locale": "iw",
+			"raw": "i18n/i18n.properties"
+		},
+		{
+			"name": "i18n/i18n_ja.properties",
+			"module": "ui/s2p/mm/ovps1/i18n/i18n_ja.properties",
+			"size": 6248,
+			"locale": "ja",
+			"raw": "i18n/i18n.properties"
+		},
+		{
+			"name": "i18n/i18n_kk.properties",
+			"module": "ui/s2p/mm/ovps1/i18n/i18n_kk.properties",
+			"size": 13271,
+			"locale": "kk",
+			"raw": "i18n/i18n.properties"
+		},
+		{
+			"name": "i18n/i18n_ko.properties",
+			"module": "ui/s2p/mm/ovps1/i18n/i18n_ko.properties",
+			"size": 6068,
+			"locale": "ko",
+			"raw": "i18n/i18n.properties"
+		},
+		{
+			"name": "i18n/i18n_lt.properties",
+			"module": "ui/s2p/mm/ovps1/i18n/i18n_lt.properties",
+			"size": 5161,
+			"locale": "lt",
+			"raw": "i18n/i18n.properties"
+		},
+		{
+			"name": "i18n/i18n_lv.properties",
+			"module": "ui/s2p/mm/ovps1/i18n/i18n_lv.properties",
+			"size": 5861,
+			"locale": "lv",
+			"raw": "i18n/i18n.properties"
+		},
+		{
+			"name": "i18n/i18n_ms.properties",
+			"module": "ui/s2p/mm/ovps1/i18n/i18n_ms.properties",
+			"size": 4667,
+			"locale": "ms",
+			"raw": "i18n/i18n.properties"
+		},
+		{
+			"name": "i18n/i18n_nl.properties",
+			"module": "ui/s2p/mm/ovps1/i18n/i18n_nl.properties",
+			"size": 4537,
+			"locale": "nl",
+			"raw": "i18n/i18n.properties"
+		},
+		{
+			"name": "i18n/i18n_no.properties",
+			"module": "ui/s2p/mm/ovps1/i18n/i18n_no.properties",
+			"size": 4826,
+			"locale": "no",
+			"raw": "i18n/i18n.properties"
+		},
+		{
+			"name": "i18n/i18n_pl.properties",
+			"module": "ui/s2p/mm/ovps1/i18n/i18n_pl.properties",
+			"size": 5108,
+			"locale": "pl",
+			"raw": "i18n/i18n.properties"
+		},
+		{
+			"name": "i18n/i18n_pt.properties",
+			"module": "ui/s2p/mm/ovps1/i18n/i18n_pt.properties",
+			"size": 5013,
+			"locale": "pt",
+			"raw": "i18n/i18n.properties"
+		},
+		{
+			"name": "i18n/i18n_ro.properties",
+			"module": "ui/s2p/mm/ovps1/i18n/i18n_ro.properties",
+			"size": 5279,
+			"locale": "ro",
+			"raw": "i18n/i18n.properties"
+		},
+		{
+			"name": "i18n/i18n_ru.properties",
+			"module": "ui/s2p/mm/ovps1/i18n/i18n_ru.properties",
+			"size": 13008,
+			"locale": "ru",
+			"raw": "i18n/i18n.properties"
+		},
+		{
+			"name": "i18n/i18n_sh.properties",
+			"module": "ui/s2p/mm/ovps1/i18n/i18n_sh.properties",
+			"size": 4434,
+			"locale": "sh",
+			"raw": "i18n/i18n.properties"
+		},
+		{
+			"name": "i18n/i18n_sk.properties",
+			"module": "ui/s2p/mm/ovps1/i18n/i18n_sk.properties",
+			"size": 5379,
+			"locale": "sk",
+			"raw": "i18n/i18n.properties"
+		},
+		{
+			"name": "i18n/i18n_sl.properties",
+			"module": "ui/s2p/mm/ovps1/i18n/i18n_sl.properties",
+			"size": 4624,
+			"locale": "sl",
+			"raw": "i18n/i18n.properties"
+		},
+		{
+			"name": "i18n/i18n_sv.properties",
+			"module": "ui/s2p/mm/ovps1/i18n/i18n_sv.properties",
+			"size": 5146,
+			"locale": "sv",
+			"raw": "i18n/i18n.properties"
+		},
+		{
+			"name": "i18n/i18n_th.properties",
+			"module": "ui/s2p/mm/ovps1/i18n/i18n_th.properties",
+			"size": 13110,
+			"locale": "th",
+			"raw": "i18n/i18n.properties"
+		},
+		{
+			"name": "i18n/i18n_tr.properties",
+			"module": "ui/s2p/mm/ovps1/i18n/i18n_tr.properties",
+			"size": 5490,
+			"locale": "tr",
+			"raw": "i18n/i18n.properties"
+		},
+		{
+			"name": "i18n/i18n_uk.properties",
+			"module": "ui/s2p/mm/ovps1/i18n/i18n_uk.properties",
+			"size": 14770,
+			"locale": "uk",
+			"raw": "i18n/i18n.properties"
+		},
+		{
+			"name": "i18n/i18n_vi.properties",
+			"module": "ui/s2p/mm/ovps1/i18n/i18n_vi.properties",
+			"size": 7210,
+			"locale": "vi",
+			"raw": "i18n/i18n.properties"
+		},
+		{
+			"name": "i18n/i18n_zh_CN.properties",
+			"module": "ui/s2p/mm/ovps1/i18n/i18n_zh_CN.properties",
+			"size": 5829,
+			"locale": "zh_CN",
+			"raw": "i18n/i18n.properties"
+		},
+		{
+			"name": "i18n/i18n_zh_TW.properties",
+			"module": "ui/s2p/mm/ovps1/i18n/i18n_zh_TW.properties",
+			"size": 5619,
+			"locale": "zh_TW",
+			"raw": "i18n/i18n.properties"
+		},
+		{
+			"name": "img/activity1.jpg",
+			"size": 130269
+		},
+		{
+			"name": "img/ovp.jpg",
+			"size": 264477
+		},
+		{
+			"name": "localService/MM_PRC_OVP/NonManagedAnnotation.xml",
+			"size": 9210
+		},
+		{
+			"name": "localService/MM_PRC_OVP/OffContractAnnotation.xml",
+			"size": 7265
+		},
+		{
+			"name": "localService/MM_PRC_OVP/OverallAnnotation.xml",
+			"size": 5055
+		},
+		{
+			"name": "localService/MM_PRC_OVP/ReqnNoTouchAnnotation.xml",
+			"size": 2223
+		},
+		{
+			"name": "localService/MM_PRC_OVP/annotation.xml",
+			"size": 80766
+		},
+		{
+			"name": "localService/MM_PRC_OVP/metadata.xml",
+			"size": 278661
+		},
+		{
+			"name": "localService/metadata.xml",
+			"size": 12427
+		},
+		{
+			"name": "localService/mockserver-dbg.js",
+			"size": 3677,
+			"isDebug": true
+		},
+		{
+			"name": "localService/mockserver.js",
+			"size": 1729
+		},
+		{
+			"name": "manifest.json",
+			"module": "ui/s2p/mm/ovps1/manifest.json",
+			"size": 21832
+		},
+		{
+			"name": "resources.json",
+			"size": 9868
+		},
+		{
+			"name": "version.json",
+			"size": 345
+		}
+	]
+}

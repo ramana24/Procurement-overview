@@ -1,0 +1,13 @@
+{
+  "application": "ui.s2p.mm.ovps1",
+  "version": "9.0.1",
+  "buildNumber": "1",
+  "buildId": "1",
+  "branch": "detached",
+  "revision": "978e755ef76393543f493a94e8dee756062c13a4",
+  "GitURL": "",
+  "buildStatus": "${env.buildStatus}",
+  "translationComplete": "${env.translationComplete}",
+  "cidi": "${env.cidi}",
+  "cfdCM": "${env.cfdCM}"
+}

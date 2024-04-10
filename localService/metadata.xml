@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+    Copyright (C) 2009-2021 SAP SE or an SAP affiliate company. All rights reserved.
+
+-->
+<edmx:Edmx Version="1.0" xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:sap="http://www.sap.com/Protocols/SAPData">
+    <edmx:DataServices m:DataServiceVersion="2.0">
+        <Schema Namespace="C_NONMNGDPURGSPEND_CDS" sap:schema-version="1" xml:lang="en" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+            <EntityType Name="C_NONMNGDPURGSPENDResult" sap:content-version="1" sap:semantics="aggregate">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="ID" Nullable="false" Type="Edm.String" sap:updatable="false"/>
+                <Property Name="TotaledProperties" Type="Edm.String" sap:aggregation-role="totaled-properties-list" sap:is-annotation="true" sap:label="Totaled Properties" sap:updatable="false"/>
+                <Property MaxLength="10" Name="Fund" Type="Edm.String" sap:aggregation-role="dimension" sap:creatable="false" sap:label="Fund" sap:updatable="false"/>
+                <Property MaxLength="10" Name="ProfitCenter" Type="Edm.String" sap:aggregation-role="dimension" sap:creatable="false" sap:label="Profit Center" sap:updatable="false"/>
+                <Property MaxLength="5" Name="CompanyCodeCurrency" Type="Edm.String" sap:aggregation-role="dimension" sap:creatable="false" sap:label="CompanyCode Currency" sap:semantics="currency-code" sap:updatable="false"/>
+                <Property MaxLength="10" Name="GLAccount" Type="Edm.String" sap:aggregation-role="dimension" sap:creatable="false" sap:label="G/L Account" sap:updatable="false"/>
+                <Property MaxLength="4" Name="ControllingArea" Type="Edm.String" sap:aggregation-role="dimension" sap:creatable="false" sap:label="Controlling Area" sap:updatable="false"/>
+                <Property MaxLength="10" Name="CostCenter" Type="Edm.String" sap:aggregation-role="dimension" sap:creatable="false" sap:label="Cost Center" sap:super-ordinate="ControllingArea" sap:text="CostCenterDescription" sap:updatable="false"/>
+                <Property Name="CostCenterDescription" Type="Edm.String" sap:creatable="false" sap:filterable="false" sap:label="Cost Center" sap:updatable="false"/>
+                <Property MaxLength="4" Name="Plant" Type="Edm.String" sap:aggregation-role="dimension" sap:creatable="false" sap:label="Plant" sap:text="PlantName" sap:updatable="false"/>
+                <Property Name="PlantName" Type="Edm.String" sap:creatable="false" sap:filterable="false" sap:label="Plant" sap:updatable="false"/>
+                <Property MaxLength="10" Name="Supplier" Type="Edm.String" sap:aggregation-role="dimension" sap:creatable="false" sap:label="Supplier" sap:text="SupplierName" sap:updatable="false"/>
+                <Property Name="SupplierName" Type="Edm.String" sap:creatable="false" sap:filterable="false" sap:label="Supplier" sap:updatable="false"/>
+                <Property MaxLength="4" Name="CompanyCode" Type="Edm.String" sap:aggregation-role="dimension" sap:creatable="false" sap:label="Company Code" sap:updatable="false"/>
+                <Property MaxLength="60" Name="PurgCatName" Type="Edm.String" sap:aggregation-role="dimension" sap:creatable="false" sap:label="Purchasing Category" sap:updatable="false"/>
+                <Property MaxLength="4" Name="CalendarYear" Type="Edm.String" sap:aggregation-role="dimension" sap:creatable="false" sap:label="Calendar Year" sap:updatable="false"/>
+                <Property MaxLength="20" Name="PurchasingCategory" Type="Edm.String" sap:aggregation-role="dimension" sap:creatable="false" sap:label="PurchCategory ID" sap:updatable="false"/>
+                <Property MaxLength="4" Name="FiscalYear" Type="Edm.String" sap:aggregation-role="dimension" sap:creatable="false" sap:label="Fiscal Year" sap:updatable="false"/>
+                <Property MaxLength="2" Name="CalendarWeek" Type="Edm.String" sap:aggregation-role="dimension" sap:creatable="false" sap:label="Calendar Week" sap:updatable="false"/>
+                <Property MaxLength="12" Name="AccountingDocCreatedByUser" Type="Edm.String" sap:aggregation-role="dimension" sap:creatable="false" sap:label="JE Created By" sap:updatable="false"/>
+                <Property MaxLength="8" Name="WBSElement" Type="Edm.String" sap:aggregation-role="dimension" sap:creatable="false" sap:label="WBS Element" sap:updatable="false"/>
+                <Property MaxLength="5" Name="DisplayCurrency" Type="Edm.String" sap:aggregation-role="dimension" sap:creatable="false" sap:label="Display Currency" sap:semantics="currency-code" sap:updatable="false"/>
+                <Property MaxLength="2" Name="CalendarMonth" Type="Edm.String" sap:aggregation-role="dimension" sap:creatable="false" sap:label="Calendar Month" sap:updatable="false"/>
+                <Property MaxLength="2" Name="AccountingDocumentType" Type="Edm.String" sap:aggregation-role="dimension" sap:creatable="false" sap:label="Document Type" sap:updatable="false"/>
+                <Property MaxLength="10" Name="AccountingDocument" Type="Edm.String" sap:aggregation-role="dimension" sap:creatable="false" sap:label="Accounting Doc. No." sap:updatable="false"/>
+                <Property MaxLength="1" Name="CalendarQuarter" Type="Edm.String" sap:aggregation-role="dimension" sap:creatable="false" sap:label="Calendar Quarter" sap:updatable="false"/>
+                <Property Name="TotalSpendAmount" Precision="36" Scale="5" Type="Edm.Decimal" sap:aggregation-role="measure" sap:creatable="false" sap:filterable="false" sap:label="Total Spend" sap:text="TotalSpendAmount_F" sap:unit="DisplayCurrency" sap:updatable="false"/>
+                <Property MaxLength="60" Name="TotalSpendAmount_F" Type="Edm.String" sap:creatable="false" sap:filterable="false" sap:label="Total Spend (Formatted)" sap:updatable="false"/>
+                <Property Name="NonManagedSpendAmount" Precision="36" Scale="5" Type="Edm.Decimal" sap:aggregation-role="measure" sap:creatable="false" sap:filterable="false" sap:label="Non Mngd Spend" sap:text="NonManagedSpendAmount_F" sap:unit="DisplayCurrency" sap:updatable="false"/>
+                <Property MaxLength="60" Name="NonManagedSpendAmount_F" Type="Edm.String" sap:creatable="false" sap:filterable="false" sap:label="Non Mngd Spend (Formatted)" sap:updatable="false"/>
+                <Property Name="NonManagedSpendInPct" Precision="36" Scale="34" Type="Edm.Decimal" sap:aggregation-role="measure" sap:creatable="false" sap:filterable="false" sap:label="Non Managed Spend %" sap:text="NonManagedSpendInPct_F" sap:updatable="false"/>
+                <Property MaxLength="60" Name="NonManagedSpendInPct_F" Type="Edm.String" sap:creatable="false" sap:filterable="false" sap:label="Non Managed Spend % (Formatted)" sap:updatable="false"/>
+            </EntityType>
+            <EntityType Name="C_NONMNGDPURGSPENDParameters" sap:content-version="1" sap:semantics="parameters">
+                <Key>
+                    <PropertyRef Name="P_DisplayCurrency"/>
+                    <PropertyRef Name="P_EvaluationTimeFrameInDays"/>
+                </Key>
+                <Property MaxLength="5" Name="P_DisplayCurrency" Nullable="false" Type="Edm.String" sap:filterable="false" sap:label="Display Currency" sap:parameter="mandatory" sap:text="P_DisplayCurrencyText"/>
+                <Property MaxLength="60" Name="P_DisplayCurrencyText" Type="Edm.String" sap:filterable="false"/>
+                <Property MaxLength="11" Name="P_EvaluationTimeFrameInDays" Nullable="false" Type="Edm.String" sap:filterable="false" sap:label="Evaluation period for coverage measurement in days" sap:parameter="mandatory" sap:text="P_EvaluationTimeFrameInDaysText"/>
+                <Property MaxLength="60" Name="P_EvaluationTimeFrameInDaysTex" Type="Edm.String" sap:filterable="false"/>
+                <NavigationProperty FromRole="ToRole_P_DisplayCurrencyToListOfValues" Name="P_DisplayCurrencyDetails" Relationship="C_NONMNGDPURGSPEND_CDS.P_DisplayCurrencyToListOfValues" ToRole="FromRole_P_DisplayCurrencyToListOfValues"/>
+                <NavigationProperty FromRole="FromRole_CMMNONMGDPUSPNDParametersToResult" Name="Results" Relationship="C_NONMNGDPURGSPEND_CDS.CMMNONMGDPUSPNDParametersToResult" ToRole="ToRole_CMMNONMGDPUSPNDParametersToResult"/>
+            </EntityType>
+            <EntityType Name="P_DisplayCurrency" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="P_DisplayCurrency_ID"/>
+                </Key>
+                <Property MaxLength="5" Name="P_DisplayCurrency_ID" Nullable="false" Type="Edm.String" sap:creatable="false" sap:label="Display Currency" sap:text="P_DisplayCurrency_TEXT" sap:updatable="false"/>
+                <Property Name="P_DisplayCurrency_TEXT" Type="Edm.String" sap:creatable="false" sap:filterable="false" sap:updatable="false"/>
+            </EntityType>
+            <Association Name="P_DisplayCurrencyToListOfValues" sap:content-version="1">
+                <End Multiplicity="1" Role="FromRole_P_DisplayCurrencyToListOfValues" Type="C_NONMNGDPURGSPEND_CDS.P_DisplayCurrency"/>
+                <End Multiplicity="*" Role="ToRole_P_DisplayCurrencyToListOfValues" Type="C_NONMNGDPURGSPEND_CDS.C_NONMNGDPURGSPENDParameters"/>
+                <ReferentialConstraint>
+                    <Principal Role="FromRole_P_DisplayCurrencyToListOfValues">
+                        <PropertyRef Name="P_DisplayCurrency_ID"/>
+                    </Principal>
+                    <Dependent Role="ToRole_P_DisplayCurrencyToListOfValues">
+                        <PropertyRef Name="P_DisplayCurrency"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="CMMNONMGDPUSPNDParametersToResult" sap:content-version="1">
+                <End Multiplicity="1" Role="FromRole_CMMNONMGDPUSPNDParametersToResult" Type="C_NONMNGDPURGSPEND_CDS.C_NONMNGDPURGSPENDParameters"/>
+                <End Multiplicity="*" Role="ToRole_CMMNONMGDPUSPNDParametersToResult" Type="C_NONMNGDPURGSPEND_CDS.C_NONMNGDPURGSPENDResult"/>
+            </Association>
+            <EntityContainer Name="C_NONMNGDPURGSPEND_CDS_Entities" m:IsDefaultEntityContainer="true" sap:supported-formats="atom json xlsx">
+                <EntitySet EntityType="C_NONMNGDPURGSPEND_CDS.C_NONMNGDPURGSPENDResult" Name="C_NONMNGDPURGSPENDResults" sap:addressable="false" sap:content-version="1" sap:creatable="false" sap:deletable="false" sap:updatable="false"/>
+                <EntitySet EntityType="C_NONMNGDPURGSPEND_CDS.C_NONMNGDPURGSPENDParameters" Name="C_NONMNGDPURGSPEND" sap:content-version="1" sap:creatable="false" sap:deletable="false" sap:updatable="false"/>
+                <EntitySet EntityType="C_NONMNGDPURGSPEND_CDS.P_DisplayCurrency" Name="P_DisplayCurrency" sap:content-version="1" sap:creatable="false" sap:deletable="false" sap:updatable="false"/>
+                <AssociationSet Association="C_NONMNGDPURGSPEND_CDS.P_DisplayCurrencyToListOfValues" Name="P_DisplayCurrencyToListOfValues_AssocSet" sap:content-version="1" sap:creatable="false" sap:deletable="false" sap:updatable="false">
+                    <End EntitySet="P_DisplayCurrency" Role="FromRole_P_DisplayCurrencyToListOfValues"/>
+                    <End EntitySet="C_NONMNGDPURGSPEND" Role="ToRole_P_DisplayCurrencyToListOfValues"/>
+                </AssociationSet>
+                <AssociationSet Association="C_NONMNGDPURGSPEND_CDS.CMMNONMGDPUSPNDParametersToResult" Name="CMMNONMGDPUSPNDParametersToResult_AssocS" sap:content-version="1" sap:creatable="false" sap:deletable="false" sap:updatable="false">
+                    <End EntitySet="C_NONMNGDPURGSPEND" Role="FromRole_CMMNONMGDPUSPNDParametersToResult"/>
+                    <End EntitySet="C_NONMNGDPURGSPENDResults" Role="ToRole_CMMNONMGDPUSPNDParametersToResult"/>
+                </AssociationSet>
+            </EntityContainer>
+            <atom:link href="./sap/C_NONMNGDPURGSPEND_CDS/$metadata" rel="self" xmlns:atom="http://www.w3.org/2005/Atom"/>
+                <atom:link href="./sap/C_NONMNGDPURGSPEND_CDS/$metadata" rel="latest-version" xmlns:atom="http://www.w3.org/2005/Atom"/>
+                </Schema>
+            </edmx:DataServices>
+        </edmx:Edmx>

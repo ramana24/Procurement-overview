@@ -1,0 +1,143 @@
+<!--
+
+    Copyright (C) 2009-2021 SAP SE or an SAP affiliate company. All rights reserved.
+
+-->
+<edmx:Edmx Version="4.0" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+	<edmx:Reference Uri="/sap/bc/ui5_ui5/ui2/ushell/resources/sap/ushell/components/factsheet/vocabularies/UI.xml">
+		<edmx:Include Alias="UI" Namespace="com.sap.vocabularies.UI.v1"/>
+	</edmx:Reference>
+	<edmx:Reference Uri="/sap/bc/ui5_ui5/ui2/ushell/resources/sap/ushell/components/factsheet/vocabularies/Communication.xml">
+		<edmx:Include Alias="vCard" Namespace="com.sap.vocabularies.Communication.v1"/>
+	</edmx:Reference>
+	<edmx:Reference Uri="http://docs.oasis-open.org/odata/odata/v4.0/cs01/vocabularies/Org.OData.Measures.V1.xml">
+		<edmx:Include Alias="CQP" Namespace="Org.OData.Measures.V1"/>
+	</edmx:Reference>
+	<edmx:Reference Uri="/sap/bc/ui5_ui5/ui2/ushell/resources/sap/ushell/components/factsheet/vocabularies/Common.xml">
+		<edmx:Include Alias="Common" Namespace="com.sap.vocabularies.Common.v1"/>
+	</edmx:Reference>
+	<edmx:Reference Uri="/sap/opu/odata/sap/C_PURGSPENDOFFCONTRACT_CDS/$metadata">
+		<edmx:Include Alias="C_PURGSPENDOFFCONTRACT_CDS" Namespace="C_PURGSPENDOFFCONTRACT_CDS"/>
+	</edmx:Reference>
+	<edmx:DataServices>
+		<Schema Alias="C_PURGSPENDOFFCONTRACT_CDSAnnotation" Namespace="sap.cbesh.cestbon.C_PURGSPENDOFFCONTRACT_CDSAnnotation"
+			xmlns="http://docs.oasis-open.org/odata/ns/edm">
+			<Annotations Target="C_PURGSPENDOFFCONTRACT_CDS.C_PURGSPENDOFFCONTRACTResult">
+				<Annotation Qualifier="OffContractSpend" Term="UI.Identification">
+					<Collection>
+						<Record Type="UI.DataFieldForIntentBasedNavigation">
+							<PropertyValue Property="Criticality" EnumMember="UI.CriticalityType/Neutral"/>
+							<Annotation EnumMember="UI.ImportanceType/High" Term="UI.Importance"/>
+							<PropertyValue Property="SemanticObject" String="PurchaseOrder"/>
+							<PropertyValue Property="Action" String="analyzeOffContractSpendSB"/>
+							<PropertyValue Property="Label" String="Off Contract Spend"/>
+						</Record>
+					</Collection>
+				</Annotation>
+				<Annotation Qualifier="OffContractSpend1" Term="UI.Identification">
+					<Collection>
+						<Record Type="UI.DataFieldForIntentBasedNavigation">
+							<PropertyValue Property="Criticality" EnumMember="UI.CriticalityType/Neutral"/>
+							<Annotation EnumMember="UI.ImportanceType/High" Term="UI.Importance"/>
+							<PropertyValue Property="SemanticObject" String="PurchaseOrder"/>
+							<PropertyValue Property="Action" String="analyzeOffContractSpendSBKPI"/>
+							<PropertyValue Property="Label" String="Off Contract Spend"/>
+						</Record>
+					</Collection>
+				</Annotation>
+				<Annotation Term="UI.DataPoint" Qualifier="OffContractSpend">
+					<Record>
+						<PropertyValue Property="Title" String="{@i18n&gt;@OFF_CONTRACT_SPEND}"/>
+						<PropertyValue Property="Value" Path="AmtWithoutContractRefInDspCrcy"/>
+						<PropertyValue Property="Criticality" EnumMember="UI.CriticalityType/Positive"/>
+						<PropertyValue Path="AmtWithoutContractRefInDspCrcy" Property="TargetValue"/>
+						<PropertyValue Property="ValueFormat">
+							<Record><PropertyValue Property="ScaleFactor" String=""/><PropertyValue Int="1" Property="NumberOfFractionalDigits"/></Record>
+						</PropertyValue>
+						<PropertyValue Property="Trend" String="UI.TrendType/StrongUp"/>
+					</Record>
+				</Annotation>
+				<Annotation Term="UI.DataPoint" Qualifier="NonContractPurchaseRateInPct">
+					<Record>
+						<PropertyValue Property="Title" String="{@i18n&gt;@OFF_CONTRACT_SPEND}"/>
+						<PropertyValue Property="ValueFormat">
+							<Record><PropertyValue Property="ScaleFactor" String=""/><PropertyValue Int="2" Property="NumberOfFractionalDigits"/></Record>
+						</PropertyValue>
+						<PropertyValue Property="Value">
+							<Apply Function="odata.concat">
+								<Path>NonContractPurchaseRateInPct</Path>
+								<String>
+									<![CDATA[ %]]>
+								</String>
+							</Apply>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+				<Annotation Term="UI.LineItem" Qualifier="OffContractSpend_byMaterialgroup">
+					<Collection>
+						<Record Type="UI.DataFieldForAnnotation">
+							<Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+							<PropertyValue Property="Target" AnnotationPath="@UI.DataPoint#OffContractSpend"/>
+						</Record>
+						<Record Type="UI.DataFieldForAnnotation">
+							<Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+							<PropertyValue Property="Target" AnnotationPath="@UI.DataPoint#NonContractPurchaseRateInPct"/>
+						</Record>
+						<Record Type="UI.DataField">
+							<Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+							<PropertyValue Property="Value" Path="MaterialGroupName"/>
+						</Record>
+						<Record Type="UI.DataField">
+							<Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+							<PropertyValue Property="Value" Path="MaterialGroup"/>
+						</Record>
+						<Record Type="UI.DataField">
+							<Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+							<PropertyValue Property="Value" Path="AmtWithoutContractRefInDspCrcy"/>
+						</Record>
+						<Record Type="UI.DataField">
+							<Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+							<PropertyValue Property="Value" Path="DisplayCurrency"/>
+						</Record>
+						<Record Type="UI.DataField">
+							<Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+							<PropertyValue Property="Value" Path="AmtWithoutContractRefInDspCrcy_F"/>
+						</Record>
+					</Collection>
+				</Annotation>
+				<Annotation Term="UI.LineItem" Qualifier="OffContractSpend_bySupplier">
+					<Collection>
+						<Record Type="UI.DataFieldForAnnotation">
+							<Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+							<PropertyValue Property="Target" AnnotationPath="@UI.DataPoint#OffContractSpend"/>
+						</Record>
+						<Record Type="UI.DataFieldForAnnotation">
+							<Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+							<PropertyValue Property="Target" AnnotationPath="@UI.DataPoint#NonContractPurchaseRateInPct"/>
+						</Record>
+						<Record Type="UI.DataField">
+							<Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+							<PropertyValue Property="Value" Path="SupplierName"/>
+						</Record>
+						<Record Type="UI.DataField">
+							<Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+							<PropertyValue Property="Value" Path="Supplier"/>
+						</Record>
+						<Record Type="UI.DataField">
+							<Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+							<PropertyValue Property="Value" Path="AmtWithoutContractRefInDspCrcy"/>
+						</Record>
+						<Record Type="UI.DataField">
+							<Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+							<PropertyValue Property="Value" Path="DisplayCurrency"/>
+						</Record>
+						<Record Type="UI.DataField">
+							<Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+							<PropertyValue Property="Value" Path="AmtWithoutContractRefInDspCrcy_F"/>
+						</Record>
+					</Collection>
+				</Annotation>
+			</Annotations>
+		</Schema>
+	</edmx:DataServices>
+</edmx:Edmx>

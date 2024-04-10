@@ -1,0 +1,100 @@
+<!--
+
+    Copyright (C) 2009-2021 SAP SE or an SAP affiliate company. All rights reserved.
+
+-->
+<edmx:Edmx xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx" Version="4.0">
+	<edmx:Reference Uri="/sap/bc/ui5_ui5/ui2/ushell/resources/sap/ushell/components/factsheet/vocabularies/UI.xml">
+		<edmx:Include Alias="UI" Namespace="com.sap.vocabularies.UI.v1"/>
+	</edmx:Reference>
+	<edmx:Reference Uri="/sap/bc/ui5_ui5/ui2/ushell/resources/sap/ushell/components/factsheet/vocabularies/Communication.xml">
+		<edmx:Include Alias="vCard" Namespace="com.sap.vocabularies.Communication.v1"/>
+	</edmx:Reference>
+	<edmx:Reference Uri="http://docs.oasis-open.org/odata/odata/v4.0/cs01/vocabularies/Org.OData.Measures.V1.xml">
+		<edmx:Include Alias="CQP" Namespace="Org.OData.Measures.V1"/>
+	</edmx:Reference>
+	<edmx:Reference Uri="/sap/bc/ui5_ui5/ui2/ushell/resources/sap/ushell/components/factsheet/vocabularies/Common.xml">
+		<edmx:Include Alias="Common" Namespace="com.sap.vocabularies.Common.v1"/>
+	</edmx:Reference>
+	<edmx:Reference Uri="/sap/opu/odata/sap/C_SUPPLIEREVALOVERALLQRY_CDS/$metadata">
+		<edmx:Include Alias="C_SUPPLIEREVALOVERALLQRY_CDS" Namespace="C_SUPPLIEREVALOVERALLQRY_CDS"/>
+	</edmx:Reference>
+	<edmx:Reference Uri="http://docs.oasis-open.org/odata/odata/v4.0/errata02/os/complete/vocabularies/Org.OData.Core.V1.xml">
+		<edmx:Include Alias="Core" Namespace="Org.OData.Core.V1"/>
+	</edmx:Reference>
+	<edmx:Reference Uri="http://docs.oasis-open.org/odata/odata/v4.0/cs01/vocabularies/Org.OData.Capabilities.V1.xml">
+		<edmx:Include Alias="Capabilities" Namespace="Org.OData.Capabilities.V1"/>
+	</edmx:Reference>
+	<edmx:DataServices>
+		<Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Alias="C_SUPPLIEREVALOVERALLQRY_CDSAnnotation"
+			Namespace="sap.cbesh.cestbon.C_SUPPLIEREVALOVERALLQRY_CDSAnnotation">
+			<Annotations Target="C_SUPPLIEREVALOVERALLQRY_CDS.C_SUPPLIEREVALOVERALLQRYResult">
+				<Annotation Qualifier="SupplierEvaluationOverall" Term="UI.Identification">
+					<Collection>
+						<Record Type="UI.DataFieldForIntentBasedNavigation">
+							<PropertyValue Property="Criticality" String="UI.CriticalityType/Neutral"/>
+							<Annotation EnumMember="UI.ImportanceType/High" Term="UI.Importance"/>
+							<PropertyValue Property="SemanticObject" String="SupplierPerformance"/>
+							<PropertyValue Property="Action" String="analyzeSBKPIDetailsS4H"/>
+							<PropertyValue Property="Label" String="Supplier Evaluation"/>
+						</Record>
+					</Collection>
+				</Annotation>
+				<Annotation Term="UI.PresentationVariant" Qualifier="_SAP_MM_PUR_SUPPLIEREVALOVERALLQRY__EVALUATIONSCOREVSSPEND">
+					<Record>
+						<PropertyValue Int32="10" Property="MaxItems"/>
+						<PropertyValue Property="ID" String=".EVALUATIONSCOREVSSPEND"/>
+						<PropertyValue Property="Visualizations">
+							<Collection>
+								<AnnotationPath>@UI.Chart#_SAP_MM_PUR_SUPPLIEREVALUATION__BYSUPPLIER</AnnotationPath>
+							</Collection>
+						</PropertyValue>
+						<PropertyValue Property="SortOrder" Path="@Common.SortOrder#_SAP_MM_PUR_SUPPLIEREVALOVERALLQRY_EVAL__EVALUATIONSCOREVSSPEND"/>
+					</Record>
+				</Annotation>				
+				
+				<Annotation Qualifier="_SAP_MM_PUR_SUPPLIEREVALUATION__BYSUPPLIER" Term="UI.Chart">
+					<Record Type="UI.ChartDefinitionType">
+						<PropertyValue Property="MeasureAttributes">
+							<Collection>
+								<Record Type="UI.ChartMeasureAttributeType">
+									<PropertyValue Property="Measure" PropertyPath="SupplierFeedbackScore"/>
+									<PropertyValue Property="Role" EnumMember="UI.ChartMeasureRoleType/Axis1"/>
+								</Record>
+								<Record Type="UI.ChartMeasureAttributeType">
+									<PropertyValue Property="Measure" PropertyPath="SupplierOperationalScore"/>
+									<PropertyValue Property="Role" EnumMember="UI.ChartMeasureRoleType/Axis2"/>
+								</Record>
+								<Record Type="UI.ChartMeasureAttributeType">
+									<PropertyValue Property="Measure" PropertyPath="TotalSpendAmount"/>
+									<PropertyValue Property="Role" EnumMember="UI.ChartMeasureRoleType/Axis3"/>
+								</Record>
+							</Collection>
+						</PropertyValue>
+						<PropertyValue Property="Measures">
+							<Collection>
+								<PropertyPath>SupplierFeedbackScore</PropertyPath>
+								<PropertyPath>SupplierOperationalScore</PropertyPath>
+								<PropertyPath>TotalSpendAmount</PropertyPath>
+							</Collection>
+						</PropertyValue>
+						<PropertyValue Property="DimensionAttributes">
+							<Collection>
+								<Record Type="UI.ChartDimensionAttributeType">
+									<PropertyValue Property="Dimension" PropertyPath="Supplier"/>
+									<PropertyValue EnumMember="UI.ChartDimensionRoleType/Series" Property="Role"/>
+								</Record>
+							</Collection>
+						</PropertyValue>
+						<PropertyValue Property="Dimensions">
+							<Collection>
+								<PropertyPath>Supplier</PropertyPath>
+							</Collection>
+						</PropertyValue>
+						<PropertyValue EnumMember="UI.ChartType/Bubble" Property="ChartType"/>
+					</Record>
+				</Annotation>
+			</Annotations>	
+		</Schema>
+	</edmx:DataServices>
+</edmx:Edmx>

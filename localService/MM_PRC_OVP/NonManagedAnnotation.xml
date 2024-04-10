@@ -1,0 +1,192 @@
+<!--
+
+    Copyright (C) 2009-2021 SAP SE or an SAP affiliate company. All rights reserved.
+
+-->
+<edmx:Edmx xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx" Version="4.0">
+	<edmx:Reference Uri="/sap/bc/ui5_ui5/ui2/ushell/resources/sap/ushell/components/factsheet/vocabularies/UI.xml">
+		<edmx:Include Alias="UI" Namespace="com.sap.vocabularies.UI.v1"/>
+	</edmx:Reference>
+	<edmx:Reference Uri="/sap/bc/ui5_ui5/ui2/ushell/resources/sap/ushell/components/factsheet/vocabularies/Communication.xml">
+		<edmx:Include Alias="vCard" Namespace="com.sap.vocabularies.Communication.v1"/>
+	</edmx:Reference>
+	<edmx:Reference Uri="http://docs.oasis-open.org/odata/odata/v4.0/cs01/vocabularies/Org.OData.Measures.V1.xml">
+		<edmx:Include Alias="CQP" Namespace="Org.OData.Measures.V1"/>
+	</edmx:Reference>
+	<edmx:Reference Uri="/sap/bc/ui5_ui5/ui2/ushell/resources/sap/ushell/components/factsheet/vocabularies/Common.xml">
+		<edmx:Include Alias="Common" Namespace="com.sap.vocabularies.Common.v1"/>
+	</edmx:Reference>
+	<edmx:Reference Uri="/sap/opu/odata/sap/C_NONMNGDPURGSPEND_CDS/$metadata">
+		<edmx:Include Alias="C_NONMNGDPURGSPEND_CDS" Namespace="C_NONMNGDPURGSPEND_CDS"/>
+	</edmx:Reference>
+	<edmx:Reference Uri="http://docs.oasis-open.org/odata/odata/v4.0/errata02/os/complete/vocabularies/Org.OData.Core.V1.xml">
+		<edmx:Include Alias="Core" Namespace="Org.OData.Core.V1"/>
+	</edmx:Reference>
+	<edmx:Reference Uri="http://docs.oasis-open.org/odata/odata/v4.0/cs01/vocabularies/Org.OData.Capabilities.V1.xml">
+		<edmx:Include Alias="Capabilities" Namespace="Org.OData.Capabilities.V1"/>
+	</edmx:Reference>
+	<edmx:DataServices>
+		<Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Alias="C_NONMNGDPURGSPEND_CDSAnnotation"
+			Namespace="sap.cbesh.cestbon.C_NONMNGDPURGSPEND_CDSAnnotation">
+			<Annotations Target="C_NONMNGDPURGSPEND_CDS.C_NONMNGDPURGSPENDResult">
+				<Annotation Term="com.sap.vocabularies.UI.v1.HeaderInfo">
+					<Record>
+						<PropertyValue Property="TypeName" String=""/>
+						<PropertyValue Property="TypeNamePlural" String=""/>
+						<PropertyValue Property="ImageUrl" String=""/>
+						<PropertyValue Property="Title">
+							<Record Type="UI.DataField">
+								<PropertyValue Property="Value" Path="SupplierName"/>
+							</Record>
+							<Record Type="UI.DataField">
+								<PropertyValue Property="Value" Path="MaterialGroupName"/>
+							</Record>
+						</PropertyValue>
+						<PropertyValue Property="Description">
+							<Record Type="com.sap.vocabularies.UI.v1.DataField">
+								<PropertyValue Property="Value" Path="NonManagedSpendAmount"/>
+							</Record>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+				<Annotation Qualifier="NonManagedSpend" Term="UI.Identification">
+					<Collection>
+						<Record Type="UI.DataFieldForIntentBasedNavigation">
+							<PropertyValue Property="Criticality" EnumMember="UI.CriticalityType/Neutral"/>
+							<Annotation EnumMember="UI.ImportanceType/High" Term="UI.Importance"/>
+							<PropertyValue Property="SemanticObject" String="PurchaseOrder"/>
+							<PropertyValue Property="Action" String="analyzeNonManagedSpendSB"/>
+							<PropertyValue Property="Label" String="Non Managed Spend"/>
+						</Record>
+					</Collection>
+				</Annotation>
+				<Annotation Qualifier="NonManagedSpend1" Term="UI.Identification">
+					<Collection>
+						<Record Type="UI.DataFieldForIntentBasedNavigation">
+							<PropertyValue Property="Criticality" EnumMember="UI.CriticalityType/Neutral"/>
+							<Annotation EnumMember="UI.ImportanceType/High" Term="UI.Importance"/>
+							<PropertyValue Property="SemanticObject" String="PurchaseOrder"/>
+							<PropertyValue Property="Action" String="analyzeNonManagedSpendSBKPI"/>
+							<PropertyValue Property="Label" String="Non Managed Spend"/>
+						</Record>
+					</Collection>
+				</Annotation>
+				<Annotation Term="UI.DataPoint" Qualifier="NonManagedSpendInPct">
+					<Record>
+						<PropertyValue Property="Title" String="{@i18n&gt;@NON_MANAGED_SPEND}"/>
+						<PropertyValue Property="Value">
+							<Apply Function="odata.concat">
+								<Path>NonManagedSpendInPct</Path>
+								<String>
+									<![CDATA[ %]]>
+								</String>
+							</Apply>
+						</PropertyValue>
+						<PropertyValue Property="ValueFormat">
+							<Record>
+								<PropertyValue Property="ScaleFactor" String=""/>
+								<PropertyValue Int="2" Property="NumberOfFractionalDigits"/>
+							</Record>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+				<Annotation Term="UI.DataPoint" Qualifier="NonManagedSpendAmount">
+					<Record>
+						<PropertyValue Property="Title" String="{@i18n&gt;@NON_MANAGED_SPEND}"/>
+						<PropertyValue Property="Value" Path="NonManagedSpendAmount"/>
+						<PropertyValue Property="ValueFormat">
+							<Record>
+								<PropertyValue Property="ScaleFactor" String=""/>
+								<PropertyValue Int="1" Property="NumberOfFractionalDigits"/>
+							</Record>
+						</PropertyValue>
+						<PropertyValue Property="Criticality" EnumMember="UI.CriticalityType/Positive"/>
+						<PropertyValue Property="Trend" String="UI.TrendType/StrongUp"/>
+					</Record>
+				</Annotation>
+				<Annotation Term="UI.DataPoint" Qualifier="TotalSpendAmount">
+					<Record>
+						<PropertyValue Property="Title" String="{@i18n&gt;@NON_MANAGED_SPEND}"/>
+						<PropertyValue Property="Value" Path="TotalSpendAmount"/>
+						<PropertyValue Property="ValueFormat">
+							<Record>
+								<PropertyValue Property="ScaleFactor" String=""/>
+								<PropertyValue Int="1" Property="NumberOfFractionalDigits"/>
+							</Record>
+						</PropertyValue>
+						<PropertyValue Property="Criticality" EnumMember="UI.CriticalityType/Positive"/>
+						<PropertyValue Property="Trend" String="UI.TrendType/StrongUp"/>
+					</Record>
+				</Annotation>
+				<Annotation Term="UI.LineItem" Qualifier="NonManagedSpend_BySupplier">
+					<Collection>
+						<Record Type="UI.DataFieldForAnnotation">
+							<Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+							<PropertyValue Property="Target" AnnotationPath="@UI.DataPoint#NonManagedSpendAmount"/>
+						</Record>
+						<Record Type="UI.DataFieldForAnnotation">
+							<Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+							<PropertyValue Property="Target" AnnotationPath="@UI.DataPoint#NonManagedSpendInPct"/>
+						</Record>
+						<Record Type="UI.DataField">
+							<Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+							<PropertyValue Property="Value" Path="SupplierName"/>
+						</Record>
+						<Record Type="UI.DataField">
+							<Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+							<PropertyValue Property="Value" Path="Supplier"/>
+						</Record>
+						<Record Type="UI.DataField">
+							<Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+							<PropertyValue Property="Value" Path="NonManagedSpendAmount"/>
+						</Record>
+						<Record Type="UI.DataField">
+							<Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+							<PropertyValue Property="Value" Path="DisplayCurrency"/>
+						</Record>
+						<Record Type="UI.DataField">
+							<Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+							<PropertyValue Property="Value" Path="NonManagedSpendAmount_F"/>
+						</Record>
+					</Collection>
+				</Annotation>
+				<Annotation Term="UI.LineItem" Qualifier="NonManagedSpend_ByMaterialgroup">
+					<Collection>
+						<Record Type="UI.DataFieldForAnnotation">
+							<Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+							<PropertyValue Property="Target" AnnotationPath="@UI.DataPoint#NonManagedSpendAmount"/>
+						</Record>
+						<Record Type="UI.DataFieldForAnnotation">
+							<Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+							<PropertyValue Property="Target" AnnotationPath="@UI.DataPoint#NonManagedSpendInPct"/>
+						</Record>
+						<Record Type="UI.DataFieldForAnnotation">
+							<Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+							<PropertyValue Property="Target" AnnotationPath="@UI.DataPoint#TotalSpendAmount"/>
+						</Record>
+						<Record Type="UI.DataField">
+							<Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+							<PropertyValue Property="Value" Path="MaterialGroupName"/>
+						</Record>
+						<Record Type="UI.DataField">
+							<Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+							<PropertyValue Property="Value" Path="MaterialGroup"/>
+						</Record>
+						<Record Type="UI.DataField">
+							<Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+							<PropertyValue Property="Value" Path="NonManagedSpendAmount"/>
+						</Record>
+						<Record Type="UI.DataField">
+							<Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+							<PropertyValue Property="Value" Path="DisplayCurrency"/>
+						</Record>
+						<Record Type="UI.DataField">
+							<Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+							<PropertyValue Property="Value" Path="NonManagedSpendAmount_F"/>
+						</Record>
+					</Collection>
+				</Annotation>
+			</Annotations>
+		</Schema>
+	</edmx:DataServices>
+</edmx:Edmx>
